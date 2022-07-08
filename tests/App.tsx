@@ -144,7 +144,7 @@ const App = () => {
                 </div>
             </div>
             <JSONViewContext.Provider value={{...jvSettings, maxArrayElements: 100}}>
-                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testURLs[filename]?.title} />
+                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testURLs[filename]?.title} collapsedStringLength={5} defaultOpenLevels={1} maxArrayElements={25} maxObjectElements={100} />
             </JSONViewContext.Provider>
         </div>
     )
