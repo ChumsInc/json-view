@@ -7,7 +7,7 @@ A component for rendering data to a collapsible tree
 [![License](https://img.shields.io/github/license/UtahGooner/json-view)](https://github.com/UtahGooner/json-view)
 [![Latest version](https://img.shields.io/github/package-json/v/UtahGooner/json-view)](https://github.com/UtahGooner/json-view)
 [![Size](https://img.shields.io/github/repo-size/UtahGooner/json-view)](https://github.com/UtahGooner/json-view)
-[![Repo Size](https://img.shields.io/github/size/UtahGooner/json-view/dist)](https://github.com/UtahGooner/json-view)
+
 
 ## Usage
 
