@@ -1,5 +1,8 @@
-import {Base16Theme, google, monokai} from "base16";
 import React from "react";
+import {google, monokai} from "base16";
+
+export {google, monokai} from "base16";
+export type {Base16Theme} from "base16";
 
 export const preferredThemes = {
     dark: monokai,
@@ -22,4 +25,5 @@ export const jvSettings: JSONViewSettings = {
 
 
 export const JSONViewContext = React.createContext<JSONViewSettings>(jvSettings);
+
 

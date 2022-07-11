@@ -1,5 +1,6 @@
-import { google, monokai } from "base16";
 import React from "react";
+import { google, monokai } from "base16";
+export { google, monokai } from "base16";
 export const preferredThemes = {
     dark: monokai,
     light: google,

@@ -1,8 +1,9 @@
-import { Base16Theme } from "base16";
 import React from "react";
+export { google, monokai } from "base16";
+export type { Base16Theme } from "base16";
 export declare const preferredThemes: {
-    dark: Base16Theme;
-    light: Base16Theme;
+    dark: import("base16").Base16Theme;
+    light: import("base16").Base16Theme;
 };
 export interface JSONViewSettings {
     collapsedStringLength: number;

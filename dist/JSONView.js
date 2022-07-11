@@ -1,12 +1,12 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { solarized } from "base16";
+import { google } from "base16";
 import './json-view.css';
 import { useContext, useEffect, useState } from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
 import { JSONViewContext, preferredThemes } from "./JSONViewContext";
 const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels }) => {
-    const [currentTheme, setCurrentTheme] = useState(solarized);
+    const [currentTheme, setCurrentTheme] = useState(google);
     const [style, setStyle] = useState({});
     const [json, setJSON] = useState({});
     // if wrapped in a parent context then use that context

@@ -1,4 +1,4 @@
-import {Base16Theme, solarized} from "base16";
+import {Base16Theme, google} from "base16";
 import './json-view.css';
 import {CSSProperties, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
@@ -27,7 +27,7 @@ const JSONView = ({
                       maxObjectElements,
                       defaultOpenLevels
                   }: JSONViewProps) => {
-    const [currentTheme, setCurrentTheme] = useState<Base16Theme>(solarized);
+    const [currentTheme, setCurrentTheme] = useState<Base16Theme>(google);
     const [style, setStyle] = useState<CSSProperties>({})
     const [json, setJSON] = useState({});
 
