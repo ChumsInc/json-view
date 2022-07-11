@@ -4,7 +4,10 @@
 
 A component for rendering data to a collapsible tree
 
-[![Latest version](https://img.shields.io/github/package-json/v/UtahGooner/json-view)](https://github.com/UtahGooner/chums-components)
+[![License](https://img.shields.io/github/license/UtahGooner/json-view)](https://github.com/UtahGooner/json-view)
+[![Latest version](https://img.shields.io/github/package-json/v/UtahGooner/json-view)](https://github.com/UtahGooner/json-view)
+[![Size](https://img.shields.io/github/repo-size/UtahGooner/json-view)](https://github.com/UtahGooner/json-view)
+[![Repo Size](https://img.shields.io/github/size/UtahGooner/json-view/dist)](https://github.com/UtahGooner/json-view)
 
 ## Usage
 
@@ -40,3 +43,7 @@ const myData: any = {test: 'this is a test', success: true};
 | defaultOpenLevels     | number      | props/context | yes      | 1       | depth of open nodes @TODO                        |
 | maxArrayElements      | number      | props/context | yes      | 25      | Number of array values to show                   |
 | maxObjectElements     | number      | props/context | yes      | 100     | Number of object members to show @TODO           |
+
+
+## Styling
+
