@@ -1,6 +1,6 @@
 {
-  "name": "chums-components",
-  "version": "2.1.6",
+  "name": "json-view",
+  "version": "1.0.0",
   "description": "Chums Common Components",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -27,14 +27,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UtahGooner/chums-components.git"
+    "url": "git+https://github.com/UtahGooner/json-view.git"
   },
   "author": "Steve Montgomery",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/UtahGooner/chums-components/issues"
+    "url": "https://github.com/UtahGooner/json-view/issues"
   },
-  "homepage": "https://github.com/UtahGooner/chums-components#readme",
+  "homepage": "https://github.com/UtahGooner/json-view#readme",
   "devDependencies": {
     "@babel/cli": "^7.12.17",
     "@babel/core": "^7.12.3",
