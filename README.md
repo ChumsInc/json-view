@@ -6,7 +6,6 @@ A component for rendering data to a collapsible tree
 
 [![Latest version](https://img.shields.io/github/package-json/v/UtahGooner/json-view)](https://github.com/UtahGooner/chums-components)
 
-
 ## Usage
 
 ```tsx
@@ -21,22 +20,23 @@ const myData: any = {test: 'this is a test', success: true};
 
 /* optionally can use the JSONViewContext Provider */
 <JSONViewContext.Provider value={{...jvSettings, maxArrayElements: 100}}>
-    <JSONView data={data.data} rootNodeName={'myData'} />
+    <JSONView data={data.data} rootNodeName={'myData'}/>
 </JSONViewContext.Provider>
 
 ```
 
 ## Install
+
 `npm install github:UtahGooner/json-view`
 
 ## Props
-| prop                  | type        | default                         | description                                                                       |
-|-----------------------|-------------|---------------------------------|-----------------------------------------------------------------------------------|
-| data                  | any         | -                               | Any data to be viewed                                                             |
-| theme                 | Base16Theme | Monokai (dark) or Google (light) | (optional) Color theme                                                            |
-| dark                  | boolean     | false                           | (optional) Dark or Light Theme                                                    |
-| rootNodeName          | string      | "root"                          | (optional)                                                                        |
-| collapsedStringLength | number      | 5                               | (optional or in JSONViewContext) Number of characters to show on collapsed string |
-| defaultOpenLevels     | number      | 1                               | (optional or in JSONViewContext) depth of open nodes @TODO                                              |
-| maxArrayElements      | number      | 25                              | (optional or in JSONViewContext) Number of array values to show                                         |
-| maxObjectElements     | number      | 100                             | (optional or in JSONViewContext) Number of object members to show @TODO                                 |
+
+| prop                  | type        | props/context | optional | default | description                                                                       |
+|-----------------------|-------------|---------------|----------|---------|-----------------------------------------------------------------------------------|
+| data                  | any         | props         | no       | n/a     | Any data to be viewed                                                             |
+| theme                 | Base16Theme | props         | yes      | google  | Color theme, defaults to Monokai (dark) or Google (light)              |
+| rootNodeName          | string      | props         | yes      | "root"  |                                                                         |
+| collapsedStringLength | number      | props/context | yes      | 5       | Number of characters to show on collapsed string |
+| defaultOpenLevels     | number      | props/context | yes      | 1       | depth of open nodes @TODO                        |
+| maxArrayElements      | number      | props/context | yes      | 25      | Number of array values to show                   |
+| maxObjectElements     | number      | props/context | yes      | 100     | Number of object members to show @TODO           |
