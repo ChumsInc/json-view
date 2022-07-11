@@ -1,3 +1,3 @@
-export * from './JSONView';
-export * from './JSONViewContext';
+export { default as JSONView } from './JSONView';
+export { JSONViewContext, jvSettings, preferredThemes } from './JSONViewContext';
 //# sourceMappingURL=index.js.map
