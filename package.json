@@ -10,7 +10,7 @@
     "copy-css": "copyfiles --verbose --up 1 src/**/*.css dist/ && copyfiles --verbose --up 1 src/**/*.scss dist/",
     "clean": "rimraf dist/",
     "compile": "tsc",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run compile && npm run copy-css",
     "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "browserslist": {

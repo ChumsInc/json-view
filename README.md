@@ -13,6 +13,8 @@ A component for rendering data to a collapsible tree
 
 ```tsx
 import {solarized} from "base16";
+import {JSONView} from 'json-veiw';
+import 'json-view/dist/json-view.css';
 
 const myData: any = {test: 'this is a test', success: true};
 
