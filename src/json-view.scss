@@ -51,10 +51,10 @@
     &--string {
         color: var(--theme-base0B);
         &::before {
-            content: open-quote;
+            content: '"';
         }
         &::after {
-            content: close-quote;
+            content: '"';
         }
     }
     &--key {

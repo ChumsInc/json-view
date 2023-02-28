@@ -53,10 +53,10 @@
   color: var(--theme-base0B);
 }
 .json-view--string::before {
-  content: open-quote;
+  content: '"';
 }
 .json-view--string::after {
-  content: close-quote;
+  content: '"';
 }
 .json-view--key {
   color: var(--theme-base0D);
