@@ -29,6 +29,8 @@ const myData: any = {test: 'this is a test', success: true};
 </JSONViewContext.Provider>
 
 ```
+## Requirements
+See package.json for peerDependencies.
 
 ## Install
 
