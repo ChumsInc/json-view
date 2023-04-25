@@ -24,7 +24,7 @@ const myData: any = {test: 'this is a test', success: true};
           maxArrayElements={25} maxObjectElements={100}/>
 
 /* optionally can use the JSONViewContext Provider */
-<JSONViewContext.Provider value={{...jvSettings, maxArrayElements: 100}}>
+<JSONViewContext.Provider data={{...jvSettings, maxArrayElements: 100}}>
     <JSONView data={data.data} rootNodeName={'myData'}/>
 </JSONViewContext.Provider>
 

@@ -1,11 +1,14 @@
-import JSONNode from "./JSONNode";
 import React from "react";
 import {ArrayValueProps} from "./ArrayNode";
+import {PreviewFunction} from "./types";
 
-export const CollapsedArrayNode = ({value}:Pick<ArrayValueProps, 'value'>) => {
+const defaultPreview: PreviewFunction = (value: any[]) => <>[&hellip;{value.length}]</>
+
+export const CollapsedArrayNode = ({value, preview}: Pick<ArrayValueProps, 'value' | 'preview'>) => {
+    const previewFunction = preview ?? defaultPreview;
     return (
         <span className="json-view--collapsed-array">
-            {value.length > 0 && (<span>&hellip;{value.length}</span>)}
+            {value.length > 0 && (<span>{previewFunction(value)}</span>)}
         </span>
     )
 }

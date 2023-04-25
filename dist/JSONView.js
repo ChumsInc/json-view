@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
 import { JSONViewContext, preferredThemes } from "./JSONViewContext";
-const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels }) => {
+const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, preview, }) => {
     const [currentTheme, setCurrentTheme] = useState(google);
     const [style, setStyle] = useState({});
     const [json, setJSON] = useState({});
@@ -50,7 +50,7 @@ const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxA
     useEffect(() => {
         setJSON(data);
     }, [data]);
-    return (_jsx(JSONViewContext.Provider, { value: context, children: _jsx("div", { className: classNames("json-view", { 'json-view--dark': dark }), style: style, children: _jsx("dl", { children: _jsx(JSONNode, { nodeKey: rootNodeName || "root", value: json }) }) }) }));
+    return (_jsx(JSONViewContext.Provider, { value: context, children: _jsx("div", { className: classNames("json-view", { 'json-view--dark': dark }), style: style, children: _jsx("dl", { children: _jsx(JSONNode, { nodeKey: rootNodeName || "root", value: json, preview: preview }) }) }) }));
 };
 export default JSONView;
 //# sourceMappingURL=JSONView.js.map

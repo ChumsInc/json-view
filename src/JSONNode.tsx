@@ -6,7 +6,7 @@ import ObjectNode from "./ObjectNode";
 import NumberNode from "./NumberNode";
 import StringNode from "./StringNode";
 
-const JSONNode = ({nodeKey, value, collapsed}: JSONNodeProps) => {
+const JSONNode = ({nodeKey, value, collapsed, preview}: JSONNodeProps) => {
     const type = nodeType(value);
     switch (type) {
     case 'number':
@@ -17,11 +17,11 @@ const JSONNode = ({nodeKey, value, collapsed}: JSONNodeProps) => {
         return <StringNode value={value} nodeKey={nodeKey} collapsed={collapsed} />
     case 'object':
         return (
-            <ObjectNode nodeKey={nodeKey} value={value} collapsed={collapsed}/>
+            <ObjectNode nodeKey={nodeKey} value={value} collapsed={collapsed} preview={preview}/>
         )
     case 'array':
         return (
-            <ArrayNode nodeKey={nodeKey} value={value} collapsed={collapsed}/>
+            <ArrayNode nodeKey={nodeKey} value={value} collapsed={collapsed} preview={preview}/>
         )
     case 'null':
 

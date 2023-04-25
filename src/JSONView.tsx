@@ -1,9 +1,9 @@
 import {Base16Theme, google} from "base16";
 import './json-view.css';
-import {CSSProperties, useContext, useEffect, useState} from "react";
+import {CSSProperties, ReactNode, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
-import {JSONViewContext, JSONViewSettings, jvSettings, preferredThemes} from "./JSONViewContext";
+import {JSONViewContext, JSONViewSettings, preferredThemes} from "./JSONViewContext";
 
 
 export interface JSONViewProps {
@@ -15,6 +15,7 @@ export interface JSONViewProps {
     maxArrayElements?: number,
     maxObjectElements?: number,
     defaultOpenLevels?: number,
+    preview?: (data: any) => ReactNode,
 }
 
 const JSONView = ({
@@ -25,7 +26,8 @@ const JSONView = ({
                       collapsedStringLength,
                       maxArrayElements,
                       maxObjectElements,
-                      defaultOpenLevels
+                      defaultOpenLevels,
+                      preview,
                   }: JSONViewProps) => {
     const [currentTheme, setCurrentTheme] = useState<Base16Theme>(google);
     const [style, setStyle] = useState<CSSProperties>({})
@@ -81,7 +83,7 @@ const JSONView = ({
         <JSONViewContext.Provider value={context}>
             <div className={classNames("json-view", {'json-view--dark': dark})} style={style}>
                 <dl>
-                    <JSONNode nodeKey={rootNodeName || "root"} value={json}/>
+                    <JSONNode nodeKey={rootNodeName || "root"} value={json} preview={preview}/>
                 </dl>
             </div>
         </JSONViewContext.Provider>

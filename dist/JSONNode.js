@@ -5,7 +5,7 @@ import ArrayNode from "./ArrayNode";
 import ObjectNode from "./ObjectNode";
 import NumberNode from "./NumberNode";
 import StringNode from "./StringNode";
-const JSONNode = ({ nodeKey, value, collapsed }) => {
+const JSONNode = ({ nodeKey, value, collapsed, preview }) => {
     const type = nodeType(value);
     switch (type) {
         case 'number':
@@ -15,9 +15,9 @@ const JSONNode = ({ nodeKey, value, collapsed }) => {
         case 'string':
             return _jsx(StringNode, { value: value, nodeKey: nodeKey, collapsed: collapsed });
         case 'object':
-            return (_jsx(ObjectNode, { nodeKey: nodeKey, value: value, collapsed: collapsed }));
+            return (_jsx(ObjectNode, { nodeKey: nodeKey, value: value, collapsed: collapsed, preview: preview }));
         case 'array':
-            return (_jsx(ArrayNode, { nodeKey: nodeKey, value: value, collapsed: collapsed }));
+            return (_jsx(ArrayNode, { nodeKey: nodeKey, value: value, collapsed: collapsed, preview: preview }));
         case 'null':
     }
     return (_jsxs("div", { className: "json-view--node", children: [_jsx(NodeKey, { children: nodeKey }), _jsx("dd", { children: jsonNodeValue(value) })] }));
