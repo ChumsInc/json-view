@@ -18,6 +18,20 @@ import 'json-view/dist/json-view.css';
 
 const myData: any = {test: 'this is a test', success: true};
 
+const previewFunction = (data:any) => {
+    if (Array.isArray(data)) {
+        return null;
+    }
+    const keys = Object.keys(data);
+    const [key1, key2, ...rest] = keys;
+    if (rest.length) {
+        return <span>{key1}, {key2 ?? null}, &hellip;</span>
+    }
+    return (
+        <span>{key1},{key2 ?? null}</span>
+    )
+
+}
 
 <JSONView data={myData} theme={solarized} dark={true} rootNodeName={'myData'}
           collapsedStringLength={5} defaultOpenLevels={1}
@@ -25,7 +39,7 @@ const myData: any = {test: 'this is a test', success: true};
 
 /* optionally can use the JSONViewContext Provider */
 <JSONViewContext.Provider data={{...jvSettings, maxArrayElements: 100}}>
-    <JSONView data={data.data} rootNodeName={'myData'}/>
+    <JSONView data={data.data} rootNodeName={'myData'} preview={previewFunction} />
 </JSONViewContext.Provider>
 
 ```
