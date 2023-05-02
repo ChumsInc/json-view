@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import NodeKey from "./NodeKey";
-import {JSONNodeProps, KeyedObject, PreviewFunction} from "./types";
+import {JSONNodeProps, KeyedObject} from "./types";
 import JSONNode from "./JSONNode";
+import {JSONViewContext} from "./JSONViewContext";
 
 export interface ObjectNodeProps extends JSONNodeProps {
     value: KeyedObject,
@@ -10,7 +11,9 @@ export interface ObjectNodeProps extends JSONNodeProps {
 const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
     const expanded = Math.max(open ?? 0, 0) > 0;
     const [show, setShow] = useState(expanded);
+    const {collapsedStringLength} = useContext(JSONViewContext)
     const keys = Object.keys(value);
+    const collapsedKeys = keys.map(key => `${key}:${JSON.stringify(value[key])}`).join(', ');
     return (
         <>
             <div className="json-view--node" onClick={() => setShow(!show)}>
@@ -18,8 +21,8 @@ const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
                 {!show && (
                     <dd>
                         <span className="json-view--collapsed-object">
-                            &hellip;
-                            {keys.length}
+                            {collapsedKeys.slice(0, collapsedStringLength)}
+                            {collapsedKeys.length > collapsedStringLength && <span className="ms-1">&hellip;</span>}
                         </span>
                     </dd>
                 )}

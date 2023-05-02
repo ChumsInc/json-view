@@ -1,6 +1,6 @@
 import {Base16Theme, google} from "base16";
 import './json-view.css';
-import {CSSProperties, ReactNode, useContext, useEffect, useState} from "react";
+import {CSSProperties, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
 import {defaultSettings, JSONViewContext, JSONViewSettings, preferredThemes} from "./JSONViewContext";

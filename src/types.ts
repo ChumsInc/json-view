@@ -12,3 +12,7 @@ export interface JSONNodeProps {
     open?: number;
 }
 
+export interface ArrayValueProps extends JSONNodeProps {
+    value: any[],
+}
+

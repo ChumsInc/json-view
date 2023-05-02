@@ -73,16 +73,16 @@
   content: "▼ ";
 }
 .json-view--collapsed-object::before {
-  content: "{";
+  content: "{ ";
 }
 .json-view--collapsed-object::after {
-  content: "}";
+  content: " }";
 }
 .json-view--collapsed-array::before {
-  content: "[";
+  content: "[ ";
 }
 .json-view--collapsed-array::after {
-  content: "]";
+  content: " ]";
 }
 
 /*# sourceMappingURL=json-view.css.map */

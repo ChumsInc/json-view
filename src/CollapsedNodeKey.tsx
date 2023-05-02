@@ -4,7 +4,7 @@ import {NodeKeyProps} from "./NodeKey";
 
 
 /**
- * CollapsedNodeKey mimics the NodeKey element, except that it returns a SPAN Element instead of a DT Element.
+ * CollapsedNodeKey mimics the NodeKey element, except that it returns a <span> Element instead of a <dt> Element.
  */
 
 const CollapsedNodeKey = ({children, expandable, expanded, onClick}:NodeKeyProps) => {

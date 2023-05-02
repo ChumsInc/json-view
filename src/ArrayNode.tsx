@@ -1,15 +1,11 @@
 import NodeKey from "./NodeKey";
-import {JSONNodeProps} from "./types";
+import {ArrayValueProps} from "./types";
 import React, {useContext, useState} from "react";
 import JSONNode from "./JSONNode";
 import {CollapsedArrayNode} from "./CollapsedArrayNode";
 import {JSONViewContext} from "./JSONViewContext";
 import PrevArrayValues from "./PrevArrayValues";
 import NextArrayValues from "./NextArrayValues";
-
-export interface ArrayValueProps extends JSONNodeProps {
-    value: any[],
-}
 
 const ArrayNode = ({value, nodeKey, open = 0}: ArrayValueProps) => {
     const expanded = Math.max(open ?? 0, 0) > 0;

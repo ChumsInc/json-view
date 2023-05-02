@@ -7,12 +7,12 @@ interface StringNodeProps extends JSONNodeProps {
     value: string,
 }
 
-const StringNode = ({nodeKey, value, open = 0}: StringNodeProps) => {
+const StringNode = ({nodeKey, value}: StringNodeProps) => {
     const {collapsedStringLength} = useContext(JSONViewContext)
-    const [show, setShow] = useState(value.length < collapsedStringLength)
+    const [show, setShow] = useState(value.length <= collapsedStringLength)
     return (
         <div className="json-view--node" onClick={() => setShow(!show)}>
-            <NodeKey>{nodeKey}</NodeKey>
+            <NodeKey expandable={value.length > collapsedStringLength} expanded={show}>{nodeKey}</NodeKey>
             {!show && (
                 <>
                     <dd className="json-view--string">

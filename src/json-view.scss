@@ -83,19 +83,19 @@
     }
     &--collapsed-object {
         &::before {
-            content: '{';
+            content: '{ ';
         }
         &::after {
-            content: '}';
+            content: ' }';
         }
     }
 
     &--collapsed-array {
         &::before {
-            content: '[';
+            content: '[ ';
         }
         &::after {
-            content: ']';
+            content: ' ]';
         }
     }
     &--collapsed-value {
