@@ -16,14 +16,14 @@ export interface JSONViewSettings {
     defaultOpenLevels: number,
 }
 
-export const jvSettings: JSONViewSettings = {
-    collapsedStringLength: 8,
+export const defaultSettings: JSONViewSettings = {
+    collapsedStringLength: 25,
     maxArrayElements: 25,
     maxObjectElements: 50,
     defaultOpenLevels: 1,
 }
 
 
-export const JSONViewContext = React.createContext<JSONViewSettings>(jvSettings);
+export const JSONViewContext = React.createContext<JSONViewSettings>(defaultSettings);
 
 

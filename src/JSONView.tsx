@@ -3,7 +3,7 @@ import './json-view.css';
 import {CSSProperties, ReactNode, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
-import {JSONViewContext, JSONViewSettings, preferredThemes} from "./JSONViewContext";
+import {defaultSettings, JSONViewContext, JSONViewSettings, preferredThemes} from "./JSONViewContext";
 
 
 export interface JSONViewProps {
@@ -15,7 +15,6 @@ export interface JSONViewProps {
     maxArrayElements?: number,
     maxObjectElements?: number,
     defaultOpenLevels?: number,
-    preview?: (data: any) => ReactNode,
 }
 
 const JSONView = ({
@@ -27,16 +26,18 @@ const JSONView = ({
                       maxArrayElements,
                       maxObjectElements,
                       defaultOpenLevels,
-                      preview,
                   }: JSONViewProps) => {
     const [currentTheme, setCurrentTheme] = useState<Base16Theme>(google);
     const [style, setStyle] = useState<CSSProperties>({})
     const [json, setJSON] = useState({});
 
     // if wrapped in a parent context then use that context
-    const parentContext = useContext(JSONViewContext);
-    const [context, setContext] = useState<JSONViewSettings>(parentContext);
+    const parentContext = useContext<JSONViewSettings>(JSONViewContext);
+    const [context, setContext] = useState<JSONViewSettings>({...defaultSettings, ...parentContext});
 
+    useEffect(() => {
+        setContext({...defaultSettings, ...parentContext});
+    }, [parentContext])
     // set the theme based on passed theme or preferred theme
     useEffect(() => {
         setCurrentTheme(theme || (dark ? preferredThemes.dark : preferredThemes.light));
@@ -46,6 +47,7 @@ const JSONView = ({
     useEffect(() => {
         setContext({
             ...context,
+            ...parentContext,
             collapsedStringLength: collapsedStringLength ?? parentContext.collapsedStringLength,
             maxArrayElements: maxArrayElements ?? parentContext.maxArrayElements,
             maxObjectElements: maxObjectElements ?? parentContext.maxObjectElements,
@@ -83,7 +85,7 @@ const JSONView = ({
         <JSONViewContext.Provider value={context}>
             <div className={classNames("json-view", {'json-view--dark': dark})} style={style}>
                 <dl>
-                    <JSONNode nodeKey={rootNodeName || "root"} value={json} preview={preview}/>
+                    <JSONNode nodeKey={rootNodeName || "root"} value={json} open={defaultOpenLevels}/>
                 </dl>
             </div>
         </JSONViewContext.Provider>

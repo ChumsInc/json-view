@@ -3,7 +3,7 @@ import React from "react";
 const JSONPreview = ({data}:{data: any}) => {
 
     if (Array.isArray(data)) {
-        return null;
+        return (<>&hellip;{data.length}</>)
     }
 
     const keys = Object.keys(data);

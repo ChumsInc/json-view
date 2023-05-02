@@ -39,7 +39,7 @@ import {
     tube,
     twilight
 } from "base16";
-import {JSONViewContext, jvSettings} from "../src";
+import {JSONViewContext, defaultSettings} from "../src";
 import JSONPreview from "./JSONPreview";
 
 interface ThemeList {
@@ -187,10 +187,8 @@ const App = () => {
                     </div>
                 </div>
             </div>
-            <JSONViewContext.Provider value={{...jvSettings, maxArrayElements: 100}}>
-                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testURLs[filename]?.title}
-                          collapsedStringLength={5} defaultOpenLevels={1} maxArrayElements={25} maxObjectElements={100}
-                          preview={renderPreview}/>
+            <JSONViewContext.Provider value={{...defaultSettings, maxArrayElements: 10}}>
+                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testURLs[filename]?.title}/>
             </JSONViewContext.Provider>
         </div>
     )

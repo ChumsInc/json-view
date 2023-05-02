@@ -9,12 +9,12 @@ import NextArrayValues from "./NextArrayValues";
 
 export interface ArrayValueProps extends JSONNodeProps {
     value: any[],
-    collapsed?: boolean
 }
 
-const ArrayNode = ({value, nodeKey, collapsed, preview}: ArrayValueProps) => {
+const ArrayNode = ({value, nodeKey, open = 0}: ArrayValueProps) => {
+    const expanded = Math.max(open ?? 0, 0) > 0;
     const {maxArrayElements} = useContext(JSONViewContext);
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(expanded);
     const [arrayIndex, setArrayIndex] = useState(0);
 
     const maxIndex = Math.floor(value.length / maxArrayElements);
@@ -26,17 +26,11 @@ const ArrayNode = ({value, nodeKey, collapsed, preview}: ArrayValueProps) => {
     const onClickDown = () => {
         setArrayIndex(Math.min(maxIndex, arrayIndex + 1));
     }
-
-    if (collapsed) {
-        return (
-            <CollapsedArrayNode value={value} preview={preview}/>
-        );
-    }
     return (
         <>
             <div className="json-view--node">
                 <NodeKey expandable={!!value.length} expanded={show} onClick={() => setShow(!show)}>{nodeKey}</NodeKey>
-                <dd><CollapsedArrayNode value={value} preview={preview}/></dd>
+                {!show && <dd><CollapsedArrayNode value={value}/></dd>}
             </div>
             {show && (
                 <dl>
@@ -46,8 +40,7 @@ const ArrayNode = ({value, nodeKey, collapsed, preview}: ArrayValueProps) => {
                     {value
                         .filter((v, index) => Math.floor(index / maxArrayElements) === arrayIndex)
                         .map((v: any, index: number) => (
-                            <JSONNode key={index} nodeKey={index + (arrayIndex * maxArrayElements)} value={v}
-                                      preview={preview}/>
+                            <JSONNode key={index} nodeKey={index + (arrayIndex * maxArrayElements)} value={v}/>
                         ))}
                     {arrayIndex < maxIndex && maxIndex > 0 && (
                         <NextArrayValues currentIndex={arrayIndex} maxItems={value.length} onClick={onClickDown}/>

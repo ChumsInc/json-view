@@ -1,10 +1,9 @@
 import JSONNode from "./JSONNode";
 import {ObjectNodeProps} from "./ObjectNode";
 import React, {Fragment} from "react";
-import NodeKey from "./NodeKey";
 import CollapsedNodeKey from "./CollapsedNodeKey";
 
-const CollapsedObjectNode = ({value}:Pick<ObjectNodeProps, 'value'>) => {
+const CollapsedObjectNode = ({value}: Pick<ObjectNodeProps, 'value'>) => {
     const keys = Object.keys(value);
 
     return (
@@ -13,8 +12,8 @@ const CollapsedObjectNode = ({value}:Pick<ObjectNodeProps, 'value'>) => {
                 .map((key, index) => (
                     <Fragment key={index}>
                         <CollapsedNodeKey>{key}</CollapsedNodeKey>
-                        <JSONNode key={key} nodeKey={key} value={value[key]} collapsed />
-                        {index < 4  && index < keys.length - 1 && (<>, </>)}
+                        <JSONNode key={key} nodeKey={key} value={value[key]}/>
+                        {index < 4 && index < keys.length - 1 && (<>, </>)}
                     </Fragment>
 
                 ))

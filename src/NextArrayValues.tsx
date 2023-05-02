@@ -10,7 +10,7 @@ const NextArrayValues = ({currentIndex, maxItems, onClick}:NextArrayValuesProps)
     const {maxArrayElements} = useContext(JSONViewContext);
     return (
         <div className="json-view--node" onClick={onClick}>
-            <dt className="json-view--key">[{(currentIndex + 1) * maxArrayElements}&hellip;{maxItems - 1}]</dt>
+            <dt className="json-view--key">[{(currentIndex + 1) * maxArrayElements} &hellip; {maxItems - 1}]</dt>
             <dd className="json-view--value">next</dd>
         </div>
     )

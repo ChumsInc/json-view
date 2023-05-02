@@ -38,8 +38,8 @@ const previewFunction = (data:any) => {
           maxArrayElements={25} maxObjectElements={100}/>
 
 /* optionally can use the JSONViewContext Provider */
-<JSONViewContext.Provider data={{...jvSettings, maxArrayElements: 100}}>
-    <JSONView data={data.data} rootNodeName={'myData'} preview={previewFunction} />
+<JSONViewContext.Provider data={{...defaultSettings, maxArrayElements: 100}}>
+    <JSONView data={data.data} rootNodeName={'myData'} previewFunction={previewFunction} />
 </JSONViewContext.Provider>
 
 ```

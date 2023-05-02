@@ -6,14 +6,7 @@ interface NumberNodeProps extends JSONNodeProps {
     value: number | bigint | boolean;
 }
 
-const NumberNode = ({nodeKey, value, collapsed}: NumberNodeProps) => {
-    if (collapsed) {
-        return (
-            <span className="json-view--number">
-                <span className="json-view--collapsed-value">{jsonNodeValue(value)}</span>
-            </span>
-        )
-    }
+const NumberNode = ({nodeKey, value}: NumberNodeProps) => {
     return (
         <div className="json-view--node">
             <NodeKey>{nodeKey}</NodeKey>
