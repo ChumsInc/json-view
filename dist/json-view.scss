@@ -36,7 +36,8 @@
     }
 
     dl dl {
-        margin-left: 0.75rem;
+        margin-left: 2rem;
+        margin-bottom: 0;
     }
     &--node {
         display: flex;
@@ -44,6 +45,7 @@
         flex-wrap: nowrap;
         justify-content: flex-start;
         align-items: baseline;
+        cursor: pointer;
     }
     &--number {
         color: var(--theme-base09);
@@ -81,20 +83,23 @@
     }
     &--collapsed-object {
         &::before {
-            content: '{';
+            content: '{ ';
         }
         &::after {
-            content: '}';
+            content: ' }';
         }
     }
 
     &--collapsed-array {
         &::before {
-            content: '[';
+            content: '[ ';
         }
         &::after {
-            content: ']';
+            content: ' ]';
         }
     }
-    &--collapsed-value {}
+    &--collapsed-value {
+        &::after {
+        }
+    }
 }

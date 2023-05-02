@@ -11,5 +11,5 @@ export interface JSONViewSettings {
     maxObjectElements: number;
     defaultOpenLevels: number;
 }
-export declare const jvSettings: JSONViewSettings;
+export declare const defaultSettings: JSONViewSettings;
 export declare const JSONViewContext: React.Context<JSONViewSettings>;

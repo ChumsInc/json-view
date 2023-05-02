@@ -37,7 +37,8 @@
   }
 }
 .json-view dl dl {
-  margin-left: 0.75rem;
+  margin-left: 2rem;
+  margin-bottom: 0;
 }
 .json-view--node {
   display: flex;
@@ -45,6 +46,7 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: baseline;
+  cursor: pointer;
 }
 .json-view--number {
   color: var(--theme-base09);
@@ -71,16 +73,16 @@
   content: "▼ ";
 }
 .json-view--collapsed-object::before {
-  content: "{";
+  content: "{ ";
 }
 .json-view--collapsed-object::after {
-  content: "}";
+  content: " }";
 }
 .json-view--collapsed-array::before {
-  content: "[";
+  content: "[ ";
 }
 .json-view--collapsed-array::after {
-  content: "]";
+  content: " ]";
 }
 
 /*# sourceMappingURL=json-view.css.map */

@@ -4,14 +4,17 @@ import './json-view.css';
 import { useContext, useEffect, useState } from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
-import { JSONViewContext, preferredThemes } from "./JSONViewContext";
-const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, preview, }) => {
+import { defaultSettings, JSONViewContext, preferredThemes } from "./JSONViewContext";
+const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, }) => {
     const [currentTheme, setCurrentTheme] = useState(google);
     const [style, setStyle] = useState({});
     const [json, setJSON] = useState({});
     // if wrapped in a parent context then use that context
     const parentContext = useContext(JSONViewContext);
-    const [context, setContext] = useState(parentContext);
+    const [context, setContext] = useState({ ...defaultSettings, ...parentContext });
+    useEffect(() => {
+        setContext({ ...defaultSettings, ...parentContext });
+    }, [parentContext]);
     // set the theme based on passed theme or preferred theme
     useEffect(() => {
         setCurrentTheme(theme || (dark ? preferredThemes.dark : preferredThemes.light));
@@ -20,6 +23,7 @@ const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxA
     useEffect(() => {
         setContext({
             ...context,
+            ...parentContext,
             collapsedStringLength: collapsedStringLength ?? parentContext.collapsedStringLength,
             maxArrayElements: maxArrayElements ?? parentContext.maxArrayElements,
             maxObjectElements: maxObjectElements ?? parentContext.maxObjectElements,
@@ -50,7 +54,7 @@ const JSONView = ({ data, theme, dark, rootNodeName, collapsedStringLength, maxA
     useEffect(() => {
         setJSON(data);
     }, [data]);
-    return (_jsx(JSONViewContext.Provider, { value: context, children: _jsx("div", { className: classNames("json-view", { 'json-view--dark': dark }), style: style, children: _jsx("dl", { children: _jsx(JSONNode, { nodeKey: rootNodeName || "root", value: json, preview: preview }) }) }) }));
+    return (_jsx(JSONViewContext.Provider, { value: context, children: _jsx("div", { className: classNames("json-view", { 'json-view--dark': dark }), style: style, children: _jsx("dl", { children: _jsx(JSONNode, { nodeKey: rootNodeName || "root", value: json, open: defaultOpenLevels }) }) }) }));
 };
 export default JSONView;
 //# sourceMappingURL=JSONView.js.map

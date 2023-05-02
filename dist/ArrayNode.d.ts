@@ -1,8 +1,4 @@
-import { JSONNodeProps } from "./types";
+import { ArrayValueProps } from "./types";
 import React from "react";
-export interface ArrayValueProps extends JSONNodeProps {
-    value: any[];
-    collapsed?: boolean;
-}
-declare const _default: React.MemoExoticComponent<({ value, nodeKey, collapsed, preview }: ArrayValueProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<({ value, nodeKey, open }: ArrayValueProps) => JSX.Element>;
 export default _default;

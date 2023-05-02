@@ -5,11 +5,11 @@ export const preferredThemes = {
     dark: monokai,
     light: google,
 };
-export const jvSettings = {
-    collapsedStringLength: 8,
+export const defaultSettings = {
+    collapsedStringLength: 25,
     maxArrayElements: 25,
     maxObjectElements: 50,
     defaultOpenLevels: 1,
 };
-export const JSONViewContext = React.createContext(jvSettings);
+export const JSONViewContext = React.createContext(defaultSettings);
 //# sourceMappingURL=JSONViewContext.js.map
