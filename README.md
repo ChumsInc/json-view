@@ -44,23 +44,36 @@ const previewFunction = (data:any) => {
 
 ```
 ## Requirements
-See package.json for peerDependencies.
+Required packages (required as peerDependencies):
+```json
+{
+  "peerDependencies": {
+    "css-loader": "^6.2.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "style-loader": "^3.2.1"
+  }
+}
+```
 
 ## Install
 
-`npm install github:UtahGooner/json-view`
+`npm install @chumsinc/json-view`
+
+`npm install base16` (optional to apply a new theme)
 
 ## Props
 
-| prop                  | type        | props/context | optional | default | description                                                                       |
-|-----------------------|-------------|---------------|----------|---------|-----------------------------------------------------------------------------------|
-| data                  | any         | props         | no       | n/a     | Any data to be viewed                                                             |
-| theme                 | Base16Theme | props         | yes      | google  | Color theme, defaults to Monokai (dark) or Google (light)              |
-| rootNodeName          | string      | props         | yes      | "root"  |                                                                         |
-| collapsedStringLength | number      | props/context | yes      | 5       | Number of characters to show on collapsed string |
-| defaultOpenLevels     | number      | props/context | yes      | 1       | depth of open nodes @TODO                        |
-| maxArrayElements      | number      | props/context | yes      | 25      | Number of array values to show                   |
-| maxObjectElements     | number      | props/context | yes      | 100     | Number of object members to show @TODO           |
+
+| name                  | type        | default    | description                                                                      |
+|-----------------------|-------------|------------|----------------------------------------------------------------------------------|
+| data (required)       | any         | n/a        | Any data to be viewed                                                            |
+| theme                 | Base16Theme | google     | Color theme, defaults to Monokai (dark) <br/>or Google (light)                   |
+| rootNodeName          | string      | "root"     | Name of the root node                                                            |
+| collapsedStringLength | number      | 5          | Number of characters to show on collapsed string<br/> (can inherit from context) |
+| defaultOpenLevels     | number      | 1          | depth of open nodes<br/>(can inherit from context)                               |
+| maxArrayElements      | number      | 25         | Number of array values to show<br/>(can inherit from context)                    |
+| maxObjectElements     | number      | 100        | Number of object members to show<br/>(can inherit from context)                  |
 
 
 ## Styling
