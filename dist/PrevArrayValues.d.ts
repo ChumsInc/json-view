@@ -1,7 +1,6 @@
-/// <reference types="react" />
 interface PrevArrayValuesProps {
     currentIndex: number;
     onClick: () => void;
 }
-declare const PrevArrayValues: ({ currentIndex, onClick }: PrevArrayValuesProps) => JSX.Element;
+declare const PrevArrayValues: ({ currentIndex, onClick }: PrevArrayValuesProps) => import("react/jsx-runtime").JSX.Element;
 export default PrevArrayValues;

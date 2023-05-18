@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Base16Theme } from "base16";
 import './json-view.css';
 export interface JSONViewProps {
@@ -11,5 +10,5 @@ export interface JSONViewProps {
     maxObjectElements?: number;
     defaultOpenLevels?: number;
 }
-declare const JSONView: ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, }: JSONViewProps) => JSX.Element;
+declare const JSONView: ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, }: JSONViewProps) => import("react/jsx-runtime").JSX.Element;
 export default JSONView;

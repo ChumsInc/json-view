@@ -5,5 +5,5 @@ export interface NodeKeyProps {
     expanded?: boolean;
     onClick?: () => void;
 }
-declare const NodeKey: ({ children, expandable, expanded, onClick }: NodeKeyProps) => JSX.Element;
+declare const NodeKey: ({ children, expandable, expanded, onClick }: NodeKeyProps) => import("react/jsx-runtime").JSX.Element;
 export default NodeKey;
