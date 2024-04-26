@@ -24,10 +24,9 @@ module.exports = merge(common, {
             {directory: process.cwd(), watch: false}
         ],
         hot: true,
-        proxy: {
-            '/api': {...localProxy},
-            '/images/': {...localProxy},
-        },
+        proxy: [
+            {context: ['/api', '/images'], ...localProxy}
+        ],
         watchFiles: ['src/**/*', 'tests/**/*'],
     },
     devtool: 'inline-source-map',
