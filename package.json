@@ -15,7 +15,7 @@
       "require": {
         "default": "./dist/index.umd.js",
         "types": "./dist/types/index.d.ts"
-      },
+      }
     }
   },
   "type": "module",
