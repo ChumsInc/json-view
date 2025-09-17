@@ -5,6 +5,8 @@ import ArrayNode from "./ArrayNode";
 import ObjectNode from "./ObjectNode";
 import NumberNode from "./NumberNode";
 import StringNode from "./StringNode";
+import StyledNode from "./StyledNode.tsx";
+
 
 const JSONNode = ({nodeKey, value, open = 0}: JSONNodeProps) => {
     switch (nodeType(value)) {
@@ -21,10 +23,10 @@ const JSONNode = ({nodeKey, value, open = 0}: JSONNodeProps) => {
     }
 
     return (
-        <div className="json-view--node">
+        <StyledNode>
             <NodeKey type={typeof value}>{nodeKey}</NodeKey>
             <dd>{jsonNodeValue(value)}</dd>
-        </div>
+        </StyledNode>
     )
 }
 

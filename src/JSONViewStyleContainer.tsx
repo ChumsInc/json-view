@@ -38,89 +38,14 @@ const JSONViewStyleContainer = styled.div`
             color: var(--theme-base05);
         }
 
-        dl dl {
-            margin-left: 2rem;
+        dl {
+            margin-left: 0;
             margin-bottom: 0;
-        }
-        &--node {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: baseline;
-            cursor: text;
-        }
-        &--number {
-            color: var(--theme-base09);
-        }
-        &--string {
-            color: var(--theme-base0B);
-            &::before {
-                content: '"';
+            & dl {
+                margin-left: 1rem;
             }
-            &::after {
-                content: '"';
-            }
-        }
-        &--key {
-            color: var(--theme-base0D);
-            display: inline-block;
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-        &--node-key {
-            //margin-right: 0.5rem;
-            //border: 1px solid var(--theme-base04);
-            padding: 0 0.25rem;
-            //background-color: var(--theme-base06);
-            color: var(--theme-base04);
-            transition: all 0.1s ease-in-out;
-            border-radius: 0.25rem;
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            transform: rotate(0deg);
-            transform-origin: center;
-            cursor: pointer;
-            &.expandable {
-                .type--string {
-                    ::before {
-                        content: '+';
-                    }
-                    &.open {
-                        ::before {
-                            content: '-';
-                        }
-                        transform: rotate(0deg);
-                    }
-                }
-                &::before {
-                    content: '▶';
-                }
-                &.open {
-                    transform: rotate(90deg);
-                }
-            }
-        }
-        &--collapsed-object {
-            &::before {
-                content: '{ ';
-            }
-            &::after {
-                content: ' }';
-            }
-        }
-
-        &--collapsed-array {
-            &::before {
-                content: '[ ';
-            }
-            &::after {
-                content: ' ]';
-            }
-        }
-        &--collapsed-value {
-            &::after {
+            dd {
+                margin-bottom: 0.25rem;
             }
         }
     }

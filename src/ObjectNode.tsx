@@ -3,10 +3,21 @@ import NodeKey from "./NodeKey";
 import type {JSONNodeProps, KeyedObject} from "./types";
 import JSONNode from "./JSONNode";
 import {JSONViewContext} from "./JSONViewContext";
+import StyledNode from "./StyledNode.tsx";
+import styled from "@emotion/styled";
 
 export interface ObjectNodeProps extends JSONNodeProps {
     value: KeyedObject,
 }
+
+const CollapsedObject = styled.span`
+    &::before {
+        content: '{ ';
+    }
+    &::after {
+        content: ' }';
+    }
+`
 
 const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
     const expanded = Math.max(open ?? 0, 0) > 0;
@@ -16,19 +27,19 @@ const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
     const collapsedKeys = keys.map(key => `${key}:${JSON.stringify(value[key])}`).join(', ');
     return (
         <>
-            <div className="json-view--node">
+            <StyledNode>
                 <NodeKey expandable={keys.length > 0}
                          expanded={show} onClick={() => setShow(!show)}
                          type={typeof value}>{nodeKey}</NodeKey>
                 {!show && (
                     <dd>
-                        <span className="json-view--collapsed-object">
+                        <CollapsedObject>
                             {collapsedKeys.slice(0, collapsedStringLength)}
                             {collapsedKeys.length > collapsedStringLength && <span className="ms-1">&hellip;</span>}
-                        </span>
+                        </CollapsedObject>
                     </dd>
                 )}
-            </div>
+            </StyledNode>
             {show && (
                 <dl>
                     {keys.map(key => (
