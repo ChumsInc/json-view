@@ -1,5 +1,5 @@
 import * as React from "react";
-import React__default, { createContext, useContext, memo, useState, forwardRef, useEffect } from "react";
+import React__default, { forwardRef, useContext, createContext, memo, useState, useEffect } from "react";
 function getDefaultExportFromCjs(x) {
   return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
 }
@@ -454,172 +454,6 @@ function requireClassnames() {
 }
 var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
-const NodeKey = ({ children, type, expandable, expanded, onClick }) => {
-  const clickHandler = () => {
-    if (expandable && !!onClick) {
-      onClick();
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("dt", { className: "json-view--key", children: [
-    expandable && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: classNames("json-view--node-key", `type--${type}`, {
-      expandable: true,
-      "collapsed": !expanded,
-      "open": expanded
-    }), onClick: clickHandler }),
-    !expandable && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: classNames("json-view--node-key", `type--${type}`) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-      children,
-      ":"
-    ] })
-  ] });
-};
-const CollapsedArrayNode = ({ value }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "json-view--collapsed-array", children: value.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-    "… ",
-    value.length
-  ] }) });
-};
-const preferredThemes = {
-  dark: monokai,
-  light: google
-};
-const defaultSettings = {
-  collapsedStringLength: 25,
-  maxArrayElements: 25,
-  maxObjectElements: 50,
-  defaultOpenLevels: 1
-};
-const JSONViewContext = createContext(defaultSettings);
-const PrevArrayValues = ({ currentIndex, onClick }) => {
-  const { maxArrayElements } = useContext(JSONViewContext);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", onClick, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("dt", { className: "json-view--key", children: [
-      "[0 … ",
-      currentIndex * maxArrayElements - 1,
-      "]"
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "json-view--value", children: "prev" })
-  ] });
-};
-const NextArrayValues = ({ currentIndex, maxItems, onClick }) => {
-  const { maxArrayElements } = useContext(JSONViewContext);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", onClick, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("dt", { className: "json-view--key", children: [
-      "[",
-      (currentIndex + 1) * maxArrayElements,
-      " … ",
-      maxItems - 1,
-      "]"
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "json-view--value", children: "next" })
-  ] });
-};
-const ArrayNode = ({ value, nodeKey, open = 0 }) => {
-  const expanded = Math.max(open ?? 0, 0) > 0;
-  const { maxArrayElements } = useContext(JSONViewContext);
-  const [show, setShow] = useState(expanded);
-  const [arrayIndex, setArrayIndex] = useState(0);
-  const maxIndex = Math.floor(value.length / maxArrayElements);
-  const onClickUp = () => {
-    setArrayIndex(Math.max(arrayIndex - 1, 0));
-  };
-  const onClickDown = () => {
-    setArrayIndex(Math.min(maxIndex, arrayIndex + 1));
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        NodeKey,
-        {
-          expandable: !!value.length,
-          type: typeof value,
-          expanded: show,
-          onClick: () => setShow(!show),
-          children: nodeKey
-        }
-      ),
-      !show && /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CollapsedArrayNode, { value }) })
-    ] }),
-    show && /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { children: [
-      arrayIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(PrevArrayValues, { currentIndex: arrayIndex, onClick: onClickUp }),
-      value.filter((_, index) => Math.floor(index / maxArrayElements) === arrayIndex).map((v, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(JSONNode, { nodeKey: index + arrayIndex * maxArrayElements, value: v }, index)),
-      arrayIndex < maxIndex && maxIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(NextArrayValues, { currentIndex: arrayIndex, maxItems: value.length, onClick: onClickDown })
-    ] })
-  ] });
-};
-const ArrayNode$1 = memo(ArrayNode);
-const ObjectNode = ({ value, nodeKey, open = 0 }) => {
-  const expanded = Math.max(open ?? 0, 0) > 0;
-  const [show, setShow] = useState(expanded);
-  const { collapsedStringLength } = useContext(JSONViewContext);
-  const keys = Object.keys(value);
-  const collapsedKeys = keys.map((key) => `${key}:${JSON.stringify(value[key])}`).join(", ");
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        NodeKey,
-        {
-          expandable: keys.length > 0,
-          expanded: show,
-          onClick: () => setShow(!show),
-          type: typeof value,
-          children: nodeKey
-        }
-      ),
-      !show && /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "json-view--collapsed-object", children: [
-        collapsedKeys.slice(0, collapsedStringLength),
-        collapsedKeys.length > collapsedStringLength && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ms-1", children: "…" })
-      ] }) })
-    ] }),
-    show && /* @__PURE__ */ jsxRuntimeExports.jsx("dl", { children: keys.map((key) => /* @__PURE__ */ jsxRuntimeExports.jsx(JSONNode, { nodeKey: key, value: value[key], open: open - 1 }, key)) })
-  ] });
-};
-const ObjectNode$1 = memo(ObjectNode);
-const NumberNode = ({ nodeKey, value }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(NodeKey, { type: typeof value, children: nodeKey }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "json-view--number", children: jsonNodeValue(value) })
-  ] });
-};
-const StringNode = ({ nodeKey, value }) => {
-  const { collapsedStringLength } = useContext(JSONViewContext);
-  const [show, setShow] = useState(value.length <= collapsedStringLength);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      NodeKey,
-      {
-        expandable: value.length > collapsedStringLength,
-        expanded: show,
-        onClick: () => setShow(!show),
-        type: typeof value,
-        children: nodeKey
-      }
-    ),
-    !show && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "json-view--string", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "json-view--collapsed-value", children: value.replace(/[\n\t]/g, " ").slice(0, collapsedStringLength) }) }),
-      value.length > collapsedStringLength && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ms-3", children: "[more]" })
-    ] }),
-    show && /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "json-view--string", children: value })
-  ] });
-};
-const JSONNode = ({ nodeKey, value, open = 0 }) => {
-  switch (nodeType(value)) {
-    case "number":
-    case "boolean":
-    case "bigint":
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(NumberNode, { value, nodeKey, open });
-    case "string":
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(StringNode, { value, nodeKey, open });
-    case "object":
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(ObjectNode$1, { nodeKey, value, open });
-    case "array":
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArrayNode$1, { nodeKey, value, open });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(NodeKey, { type: typeof value, children: nodeKey }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: jsonNodeValue(value) })
-  ] });
-};
 function _extends() {
   return _extends = Object.assign ? Object.assign.bind() : function(n) {
     for (var e = 1; e < arguments.length; e++) {
@@ -1994,6 +1828,265 @@ var styled = createStyled.bind(null);
 tags.forEach(function(tagName) {
   styled[tagName] = styled(tagName);
 });
+const StyledNodeKey = styled.dt`
+    //padding: 0 0.25rem;
+    color: var(--theme-base04);
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+`;
+const NodeToggle = styled.div`
+    padding: 0 0.25rem;
+    color: var(--theme-base04);
+    display: flex;
+    width: 1rem;
+    height: 1rem;
+    flex-direction: row;
+    gap: 0.25rem;
+    cursor: default;
+    &.expandable {
+        transition: all 0.1s ease-in-out;
+        border-radius: 0.25rem;
+        transform: rotate(0deg);
+        transform-origin: center;
+        cursor: pointer;
+        &.type--string {
+            ::before {
+                content: '+';
+                font-size: 1rem;
+            }
+            &.open {
+                ::before {
+                    content: '-';
+                }
+                transform: rotate(0deg);
+            }
+        }
+        &::before {
+            content: '▶';
+            font-size: 0.5rem;
+        }
+        &.open {
+            transform: rotate(90deg);
+        }
+    }
+`;
+const NodeKey = ({ children, type, expandable, expanded, onClick }) => {
+  const clickHandler = () => {
+    if (expandable && !!onClick) {
+      onClick();
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNodeKey, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(NodeToggle, { className: classNames(`type--${type}`, { expandable, open: expanded }), onClick: clickHandler }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      children,
+      ":"
+    ] })
+  ] });
+};
+const preferredThemes = {
+  dark: monokai,
+  light: google
+};
+const defaultSettings = {
+  collapsedStringLength: 25,
+  maxArrayElements: 25,
+  maxObjectElements: 50,
+  defaultOpenLevels: 1
+};
+const JSONViewContext = createContext(defaultSettings);
+const StyledNode = styled.dl`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    cursor: text;
+    min-height: 1.25rem;
+    gap: 0.5rem;
+`;
+const MoreResultsTitle = styled.dt`
+    color: var(--theme-base0D);
+    display: block;
+    font-weight: 700;
+    cursor: pointer;
+`;
+const MoreResultsLink = styled.dd`
+    color: var(--theme-base0D);
+    display: block;
+    font-weight: 700;
+    cursor: pointer;
+`;
+const PrevArrayValues = ({ currentIndex, onClick }) => {
+  const { maxArrayElements } = useContext(JSONViewContext);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNode, { onClick, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(MoreResultsTitle, { children: [
+      "[0 … ",
+      currentIndex * maxArrayElements - 1,
+      "]"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(MoreResultsLink, { className: "json-view--value", children: "prev" })
+  ] });
+};
+const NextArrayValues = ({ currentIndex, maxItems, onClick }) => {
+  const { maxArrayElements } = useContext(JSONViewContext);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "json-view--node", onClick, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("dt", { className: "json-view--key", children: [
+      "[",
+      (currentIndex + 1) * maxArrayElements,
+      " … ",
+      maxItems - 1,
+      "]"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "json-view--value", children: "next" })
+  ] });
+};
+const CollapsedArray = styled.span`
+    &::before {
+        content: '[ ';
+    }
+
+    &::after {
+        content: ' ]';
+    }
+`;
+const ArrayNode = ({ value, nodeKey, open = 0 }) => {
+  const expanded = Math.max(open ?? 0, 0) > 0;
+  const { maxArrayElements } = useContext(JSONViewContext);
+  const [show, setShow] = useState(expanded);
+  const [arrayIndex, setArrayIndex] = useState(0);
+  const maxIndex = Math.floor(value.length / maxArrayElements);
+  const onClickUp = () => {
+    setArrayIndex(Math.max(arrayIndex - 1, 0));
+  };
+  const onClickDown = () => {
+    setArrayIndex(Math.min(maxIndex, arrayIndex + 1));
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNode, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        NodeKey,
+        {
+          expandable: !!value.length,
+          type: typeof value,
+          expanded: show,
+          onClick: () => setShow(!show),
+          children: nodeKey
+        }
+      ),
+      !show && /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CollapsedArray, { children: value.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "… ",
+        value.length
+      ] }) }) })
+    ] }),
+    show && /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { children: [
+      arrayIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(PrevArrayValues, { currentIndex: arrayIndex, onClick: onClickUp }),
+      value.filter((_, index) => Math.floor(index / maxArrayElements) === arrayIndex).map((v, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(JSONNode, { nodeKey: index + arrayIndex * maxArrayElements, value: v }, index)),
+      arrayIndex < maxIndex && maxIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(NextArrayValues, { currentIndex: arrayIndex, maxItems: value.length, onClick: onClickDown })
+    ] })
+  ] });
+};
+const ArrayNode$1 = memo(ArrayNode);
+const CollapsedObject = styled.span`
+    &::before {
+        content: '{ ';
+    }
+    &::after {
+        content: ' }';
+    }
+`;
+const ObjectNode = ({ value, nodeKey, open = 0 }) => {
+  const expanded = Math.max(open ?? 0, 0) > 0;
+  const [show, setShow] = useState(expanded);
+  const { collapsedStringLength } = useContext(JSONViewContext);
+  const keys = Object.keys(value);
+  const collapsedKeys = keys.map((key) => `${key}:${JSON.stringify(value[key])}`).join(", ");
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNode, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        NodeKey,
+        {
+          expandable: keys.length > 0,
+          expanded: show,
+          onClick: () => setShow(!show),
+          type: typeof value,
+          children: nodeKey
+        }
+      ),
+      !show && /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CollapsedObject, { children: [
+        collapsedKeys.slice(0, collapsedStringLength),
+        collapsedKeys.length > collapsedStringLength && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ms-1", children: "…" })
+      ] }) })
+    ] }),
+    show && /* @__PURE__ */ jsxRuntimeExports.jsx("dl", { children: keys.map((key) => /* @__PURE__ */ jsxRuntimeExports.jsx(JSONNode, { nodeKey: key, value: value[key], open: open - 1 }, key)) })
+  ] });
+};
+const ObjectNode$1 = memo(ObjectNode);
+const StyledDD$1 = styled.dd`
+    color: var(--theme-base09);
+`;
+const NumberNode = ({ nodeKey, value }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNode, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(NodeKey, { type: typeof value, children: nodeKey }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(StyledDD$1, { children: jsonNodeValue(value) })
+  ] });
+};
+const StyledDD = styled.dd`
+    color: var(--theme-base0B);
+    width: 100%;
+    &.collapsed {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &::before {
+        content: '"';
+    }
+
+    &::after {
+        content: '"';
+    }
+`;
+const StringNode = ({ nodeKey, value }) => {
+  const { collapsedStringLength } = useContext(JSONViewContext);
+  const [show, setShow] = useState(value.length <= collapsedStringLength);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNode, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      NodeKey,
+      {
+        expandable: value.length > collapsedStringLength,
+        expanded: show,
+        onClick: () => setShow(!show),
+        type: typeof value,
+        children: nodeKey
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledDD, { className: classNames({ collapsed: !show }), children: [
+      !show && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: value.replace(/[\n\t]/g, " ") }),
+      show && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: value })
+    ] })
+  ] });
+};
+const JSONNode = ({ nodeKey, value, open = 0 }) => {
+  switch (nodeType(value)) {
+    case "number":
+    case "boolean":
+    case "bigint":
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(NumberNode, { value, nodeKey, open });
+    case "string":
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(StringNode, { value, nodeKey, open });
+    case "object":
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(ObjectNode$1, { nodeKey, value, open });
+    case "array":
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArrayNode$1, { nodeKey, value, open });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledNode, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(NodeKey, { type: typeof value, children: nodeKey }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: jsonNodeValue(value) })
+  ] });
+};
 const JSONViewStyleContainer = styled.div`
     .json-view {
         --theme-base00: #002b36;
@@ -2032,89 +2125,14 @@ const JSONViewStyleContainer = styled.div`
             color: var(--theme-base05);
         }
 
-        dl dl {
-            margin-left: 2rem;
+        dl {
+            margin-left: 0;
             margin-bottom: 0;
-        }
-        &--node {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: baseline;
-            cursor: text;
-        }
-        &--number {
-            color: var(--theme-base09);
-        }
-        &--string {
-            color: var(--theme-base0B);
-            &::before {
-                content: '"';
+            & dl {
+                margin-left: 1rem;
             }
-            &::after {
-                content: '"';
-            }
-        }
-        &--key {
-            color: var(--theme-base0D);
-            display: inline-block;
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-        &--node-key {
-            //margin-right: 0.5rem;
-            //border: 1px solid var(--theme-base04);
-            padding: 0 0.25rem;
-            //background-color: var(--theme-base06);
-            color: var(--theme-base04);
-            transition: all 0.1s ease-in-out;
-            border-radius: 0.25rem;
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            transform: rotate(0deg);
-            transform-origin: center;
-            cursor: pointer;
-            &.expandable {
-                .type--string {
-                    ::before {
-                        content: '+';
-                    }
-                    &.open {
-                        ::before {
-                            content: '-';
-                        }
-                        transform: rotate(0deg);
-                    }
-                }
-                &::before {
-                    content: '▶';
-                }
-                &.open {
-                    transform: rotate(90deg);
-                }
-            }
-        }
-        &--collapsed-object {
-            &::before {
-                content: '{ ';
-            }
-            &::after {
-                content: ' }';
-            }
-        }
-
-        &--collapsed-array {
-            &::before {
-                content: '[ ';
-            }
-            &::after {
-                content: ' ]';
-            }
-        }
-        &--collapsed-value {
-            &::after {
+            dd {
+                margin-bottom: 0.25rem;
             }
         }
     }
