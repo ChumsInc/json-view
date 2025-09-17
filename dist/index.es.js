@@ -2035,9 +2035,10 @@ const NumberNode = ({ nodeKey, value }) => {
 const StyledDD = styled.dd`
     color: var(--theme-base0B);
     width: 100%;
-    word-break: break-all;
-    white-space: pre-wrap;
-    overflow: auto;
+    &:not(.collapsed) {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
     &.collapsed {
         overflow: hidden;
         text-overflow: ellipsis;
