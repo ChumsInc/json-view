@@ -2054,6 +2054,9 @@
   const StyledDD = styled.dd`
     color: var(--theme-base0B);
     width: 100%;
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow: auto;
     &.collapsed {
         overflow: hidden;
         text-overflow: ellipsis;
