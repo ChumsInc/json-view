@@ -1,6 +1,6 @@
-import React, {useContext, useState} from "react";
+import {memo, useContext, useState} from "react";
 import NodeKey from "./NodeKey";
-import {JSONNodeProps, KeyedObject} from "./types";
+import type {JSONNodeProps, KeyedObject} from "./types";
 import JSONNode from "./JSONNode";
 import {JSONViewContext} from "./JSONViewContext";
 
@@ -16,8 +16,10 @@ const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
     const collapsedKeys = keys.map(key => `${key}:${JSON.stringify(value[key])}`).join(', ');
     return (
         <>
-            <div className="json-view--node" onClick={() => setShow(!show)}>
-                <NodeKey expandable={keys.length > 0} expanded={show}>{nodeKey}</NodeKey>
+            <div className="json-view--node">
+                <NodeKey expandable={keys.length > 0}
+                         expanded={show} onClick={() => setShow(!show)}
+                         type={typeof value}>{nodeKey}</NodeKey>
                 {!show && (
                     <dd>
                         <span className="json-view--collapsed-object">
@@ -37,4 +39,4 @@ const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
     )
 }
 
-export default React.memo(ObjectNode);
+export default memo(ObjectNode);

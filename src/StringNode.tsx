@@ -1,4 +1,4 @@
-import {JSONNodeProps} from "./types";
+import type {JSONNodeProps} from "./types";
 import NodeKey from "./NodeKey";
 import {useContext, useState} from "react";
 import {JSONViewContext} from "./JSONViewContext";
@@ -11,8 +11,10 @@ const StringNode = ({nodeKey, value}: StringNodeProps) => {
     const {collapsedStringLength} = useContext(JSONViewContext)
     const [show, setShow] = useState(value.length <= collapsedStringLength)
     return (
-        <div className="json-view--node" onClick={() => setShow(!show)}>
-            <NodeKey expandable={value.length > collapsedStringLength} expanded={show}>{nodeKey}</NodeKey>
+        <div className="json-view--node">
+            <NodeKey expandable={value.length > collapsedStringLength}
+                     expanded={show} onClick={() => setShow(!show)}
+                     type={typeof  value}>{nodeKey}</NodeKey>
             {!show && (
                 <>
                     <dd className="json-view--string">

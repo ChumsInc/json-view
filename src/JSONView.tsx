@@ -1,9 +1,10 @@
-import {Base16Theme, google} from "base16";
-import './json-view.css';
-import {CSSProperties, useContext, useEffect, useState} from "react";
+import {type Base16Theme, google} from "base16";
+import {type CSSProperties, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
-import {defaultSettings, JSONViewContext, JSONViewSettings, preferredThemes} from "./JSONViewContext";
+import {defaultSettings, JSONViewContext, preferredThemes} from "./JSONViewContext";
+import JSONViewStyleContainer from "./JSONViewStyleContainer.tsx";
+import type {JSONViewSettings} from "./types";
 
 
 export interface JSONViewProps {
@@ -83,11 +84,13 @@ const JSONView = ({
 
     return (
         <JSONViewContext.Provider value={context}>
-            <div className={classNames("json-view", {'json-view--dark': dark})} style={style}>
-                <dl>
-                    <JSONNode nodeKey={rootNodeName || "root"} value={json} open={defaultOpenLevels}/>
-                </dl>
-            </div>
+            <JSONViewStyleContainer>
+                <div className={classNames("json-view", {'json-view--dark': dark})} style={style}>
+                    <dl>
+                        <JSONNode nodeKey={rootNodeName || "root"} value={json} open={defaultOpenLevels}/>
+                    </dl>
+                </div>
+            </JSONViewStyleContainer>
         </JSONViewContext.Provider>
     )
 }

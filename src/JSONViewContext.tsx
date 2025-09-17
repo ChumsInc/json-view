@@ -1,19 +1,12 @@
-import React from "react";
+import {createContext} from "react";
 import {google, monokai} from "base16";
+import type {JSONViewSettings} from "./types";
 
 export {google, monokai} from "base16";
-export type {Base16Theme} from "base16";
 
 export const preferredThemes = {
     dark: monokai,
     light: google,
-}
-
-export interface JSONViewSettings {
-    collapsedStringLength: number,
-    maxArrayElements: number,
-    maxObjectElements: number,
-    defaultOpenLevels: number,
 }
 
 export const defaultSettings: JSONViewSettings = {
@@ -23,7 +16,6 @@ export const defaultSettings: JSONViewSettings = {
     defaultOpenLevels: 1,
 }
 
-
-export const JSONViewContext = React.createContext<JSONViewSettings>(defaultSettings);
+export const JSONViewContext = createContext<JSONViewSettings>(defaultSettings);
 
 

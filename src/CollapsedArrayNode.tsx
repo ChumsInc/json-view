@@ -1,5 +1,4 @@
-import React from "react";
-import {ArrayValueProps} from "./types";
+import type {ArrayValueProps} from "./types";
 
 export const CollapsedArrayNode = ({value}: Pick<ArrayValueProps, 'value'>) => {
     return (

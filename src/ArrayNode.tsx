@@ -1,6 +1,6 @@
 import NodeKey from "./NodeKey";
-import {ArrayValueProps} from "./types";
-import React, {useContext, useState} from "react";
+import type {ArrayValueProps} from "./types";
+import {useContext, useState, memo} from "react";
 import JSONNode from "./JSONNode";
 import {CollapsedArrayNode} from "./CollapsedArrayNode";
 import {JSONViewContext} from "./JSONViewContext";
@@ -25,7 +25,8 @@ const ArrayNode = ({value, nodeKey, open = 0}: ArrayValueProps) => {
     return (
         <>
             <div className="json-view--node">
-                <NodeKey expandable={!!value.length} expanded={show} onClick={() => setShow(!show)}>{nodeKey}</NodeKey>
+                <NodeKey expandable={!!value.length} type={typeof value}
+                         expanded={show} onClick={() => setShow(!show)}>{nodeKey}</NodeKey>
                 {!show && <dd><CollapsedArrayNode value={value}/></dd>}
             </div>
             {show && (
@@ -34,7 +35,7 @@ const ArrayNode = ({value, nodeKey, open = 0}: ArrayValueProps) => {
                         <PrevArrayValues currentIndex={arrayIndex} onClick={onClickUp}/>
                     )}
                     {value
-                        .filter((v, index) => Math.floor(index / maxArrayElements) === arrayIndex)
+                        .filter((_, index) => Math.floor(index / maxArrayElements) === arrayIndex)
                         .map((v: any, index: number) => (
                             <JSONNode key={index} nodeKey={index + (arrayIndex * maxArrayElements)} value={v}/>
                         ))}
@@ -47,4 +48,4 @@ const ArrayNode = ({value, nodeKey, open = 0}: ArrayValueProps) => {
     )
 }
 
-export default React.memo(ArrayNode);
+export default memo(ArrayNode);

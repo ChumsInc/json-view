@@ -1,6 +1,6 @@
 import {jsonNodeValue, nodeType} from "./utils";
 import NodeKey from "./NodeKey";
-import {JSONNodeProps} from "./types";
+import type {JSONNodeProps} from "./types";
 import ArrayNode from "./ArrayNode";
 import ObjectNode from "./ObjectNode";
 import NumberNode from "./NumberNode";
@@ -22,7 +22,7 @@ const JSONNode = ({nodeKey, value, open = 0}: JSONNodeProps) => {
 
     return (
         <div className="json-view--node">
-            <NodeKey>{nodeKey}</NodeKey>
+            <NodeKey type={typeof value}>{nodeKey}</NodeKey>
             <dd>{jsonNodeValue(value)}</dd>
         </div>
     )
