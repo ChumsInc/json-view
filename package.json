@@ -1,7 +1,7 @@
 {
   "name": "@chumsinc/json-view",
   "version": "1.2.5",
-  "description": "Chums Common Components",
+  "description": "Chums JSONView Component",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "source": "src/index.ts",
