@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 export type {Base16Theme} from 'base16';
 
 export type PreviewFunction = (value: any) => ReactNode;
