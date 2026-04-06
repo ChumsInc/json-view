@@ -1,13 +1,13 @@
 {
   "name": "@chumsinc/json-view",
   "version": "2.0.2",
+  "type": "module",
   "description": "Chums JSONView Component",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
-  "source": "src/index.ts",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "source": "./src/index.ts",
   "types": "./dist/types/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
       "import": {
         "types": "./dist/types/index.d.ts",
@@ -19,10 +19,11 @@
       }
     }
   },
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run build-vite && npm run build-dts",
+    "build-vite": "vite build",
+    "build-dts": "tsc -p tsconfig-dts.json",
     "lint": "eslint .",
     "preview": "vite preview",
     "version": "auto-changelog -p && git add CHANGELOG.md"

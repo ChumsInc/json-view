@@ -3,7 +3,7 @@ import NodeKey from "./NodeKey";
 import type {JSONNodeProps, KeyedObject} from "./types";
 import JSONNode from "./JSONNode";
 import {JSONViewContext} from "./JSONViewContext";
-import StyledNode from "./StyledNode.tsx";
+import StyledNode from "./StyledNode";
 import styled from "@emotion/styled";
 
 export interface ObjectNodeProps extends JSONNodeProps {

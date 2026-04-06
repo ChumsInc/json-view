@@ -17,12 +17,13 @@ export default defineConfig({
             formats: ['es', 'cjs'],
         },
         rollupOptions: {
-            external: ['react', 'react/jsx-runtime', 'react-dom'],
+            external: ['react', 'react/jsx-runtime', 'react-dom', '@emotion/styled'],
             output: {
                 globals:{
                     react: 'React',
                     'react-dom': 'ReactDOM',
                     'react/jsx-runtime': 'jsxRuntime',
+                    '@emotion/styled': 'styled'
                 }
             }
         },

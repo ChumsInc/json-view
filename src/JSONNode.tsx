@@ -5,7 +5,7 @@ import ArrayNode from "./ArrayNode";
 import ObjectNode from "./ObjectNode";
 import NumberNode from "./NumberNode";
 import StringNode from "./StringNode";
-import StyledNode from "./StyledNode.tsx";
+import StyledNode from "./StyledNode";
 
 
 const JSONNode = ({nodeKey, value, open = 0}: JSONNodeProps) => {

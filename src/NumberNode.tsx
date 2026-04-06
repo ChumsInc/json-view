@@ -1,7 +1,7 @@
 import type {JSONNodeProps} from "./types";
 import {jsonNodeValue} from "./utils";
 import NodeKey from "./NodeKey";
-import StyledNode from "./StyledNode.tsx";
+import StyledNode from "./StyledNode";
 import styled from "@emotion/styled";
 
 interface NumberNodeProps extends JSONNodeProps {

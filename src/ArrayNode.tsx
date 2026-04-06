@@ -5,7 +5,7 @@ import JSONNode from "./JSONNode";
 import {JSONViewContext} from "./JSONViewContext";
 import PrevArrayValues from "./PrevArrayValues";
 import NextArrayValues from "./NextArrayValues";
-import StyledNode from "./StyledNode.tsx";
+import StyledNode from "./StyledNode";
 import styled from "@emotion/styled";
 
 

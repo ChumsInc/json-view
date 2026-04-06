@@ -1,8 +1,8 @@
 import {useContext} from "react";
 import {JSONViewContext} from "./JSONViewContext";
-import StyledNode from "./StyledNode.tsx";
-import MoreResultsTitle from "./MoreResultsTitle.tsx";
-import MoreResultsLink from "./MoreResultsLink.tsx";
+import StyledNode from "./StyledNode";
+import MoreResultsTitle from "./MoreResultsTitle";
+import MoreResultsLink from "./MoreResultsLink";
 
 interface PrevArrayValuesProps {
     currentIndex: number,

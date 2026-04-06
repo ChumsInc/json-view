@@ -3,7 +3,7 @@ import {type CSSProperties, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
 import {defaultSettings, JSONViewContext, preferredThemes} from "./JSONViewContext";
-import JSONViewStyleContainer from "./JSONViewStyleContainer.tsx";
+import JSONViewStyleContainer from "./JSONViewStyleContainer";
 import type {JSONViewSettings} from "./types";
 
 

@@ -2,7 +2,7 @@ import type {JSONNodeProps} from "./types";
 import NodeKey from "./NodeKey";
 import {useContext, useState} from "react";
 import {JSONViewContext} from "./JSONViewContext";
-import StyledNode from "./StyledNode.tsx";
+import StyledNode from "./StyledNode";
 import styled from "@emotion/styled";
 import classNames from "classnames";
 
