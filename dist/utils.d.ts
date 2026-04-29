@@ -1,2 +1,4 @@
-export declare const nodeType: (value: any) => "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function" | "null" | "array";
-export declare const jsonNodeValue: (value: any) => string | null;
+import type { KeyedObject, NumberValue } from "./types";
+export declare const jsonNodeValue: (value: unknown) => string | null;
+export declare const isNumberNode: (value: unknown | NumberValue) => value is NumberValue;
+export declare const isKeyedObject: (value: unknown | KeyedObject) => value is KeyedObject;

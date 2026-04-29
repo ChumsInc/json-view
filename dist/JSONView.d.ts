@@ -1,6 +1,6 @@
 import { type Base16Theme } from "base16";
-export interface JSONViewProps {
-    data: any;
+export interface JSONViewProps<T = unknown> {
+    data: T;
     theme?: Base16Theme;
     dark?: boolean;
     rootNodeName?: string;
@@ -9,5 +9,4 @@ export interface JSONViewProps {
     maxObjectElements?: number;
     defaultOpenLevels?: number;
 }
-declare const JSONView: ({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, }: JSONViewProps) => import("react/jsx-runtime").JSX.Element;
-export default JSONView;
+export default function JSONView<T = unknown>({ data, theme, dark, rootNodeName, collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels, }: JSONViewProps<T>): import("react/jsx-runtime").JSX.Element;

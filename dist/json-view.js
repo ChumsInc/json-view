@@ -2,7 +2,7 @@ import { createContext as e, memo as t, useContext as n, useEffect as r, useStat
 import a from "@emotion/styled";
 import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region \0rolldown/runtime.js
-var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescriptor, f = Object.getOwnPropertyNames, p = Object.getPrototypeOf, m = Object.prototype.hasOwnProperty, h = (e, t) => () => (t || e((t = { exports: {} }).exports, t), t.exports), g = (e, t, n, r) => {
+var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescriptor, f = Object.getOwnPropertyNames, p = Object.getPrototypeOf, m = Object.prototype.hasOwnProperty, h = (e, t) => () => (t || (e((t = { exports: {} }).exports, t), e = null), t.exports), g = (e, t, n, r) => {
 	if (t && typeof t == "object" || typeof t == "function") for (var i = f(t), a = 0, o = i.length, s; a < o; a++) s = i[a], !m.call(e, s) && s !== n && u(e, s, {
 		get: ((e) => t[e]).bind(null, s),
 		enumerable: !(r = d(t, s)) || r.enumerable
@@ -50,18 +50,15 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
 	base0E: "#ae81ff",
 	base0F: "#cc6633"
 }, b = (e) => {
-	let t = typeof e;
-	switch (t) {
-		case "object": return e === null ? "null" : Array.isArray(e) ? "array" : t;
-		default: return t;
-	}
-}, x = (e) => {
 	try {
 		return JSON.stringify(e, void 0, 2);
 	} catch (e) {
 		return e instanceof Error ? e.message : null;
 	}
-}, S = /* @__PURE__ */ _((/* @__PURE__ */ h(((e, t) => {
+}, x = (e) => {
+	let t = typeof e;
+	return t === "number" || t === "bigint" || t === "boolean";
+}, S = (e) => typeof e == "object" && !!e, C = /* @__PURE__ */ _((/* @__PURE__ */ h(((e, t) => {
 	(function() {
 		var e = {}.hasOwnProperty;
 		function n() {
@@ -87,13 +84,13 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
 			return n;
 		}) : window.classNames = n;
 	})();
-})))(), 1), C = a.dt`
+})))(), 1), w = a.dt`
     //padding: 0 0.25rem;
     color: var(--theme-base04);
     display: flex;
     flex-direction: row;
     gap: 0.25rem;
-`, w = a.div`
+`, T = a.div`
     padding: 0 0.25rem;
     color: var(--theme-base04);
     display: flex;
@@ -128,23 +125,23 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
             transform: rotate(90deg);
         }
     }
-`, T = ({ children: e, type: t, expandable: n, expanded: r, onClick: i }) => /* @__PURE__ */ c(C, { children: [/* @__PURE__ */ s(w, {
-	className: (0, S.default)(`type--${t}`, {
+`, E = ({ children: e, type: t, expandable: n, expanded: r, onClick: i }) => /* @__PURE__ */ c(w, { children: [/* @__PURE__ */ s(T, {
+	className: (0, C.default)(`type--${t}`, {
 		expandable: n,
 		open: r
 	}),
 	onClick: () => {
 		n && i && i();
 	}
-}), /* @__PURE__ */ c("div", { children: [e, ":"] })] }), E = {
+}), /* @__PURE__ */ c("div", { children: [e, ":"] })] }), D = {
 	dark: y,
 	light: v
-}, D = {
+}, O = {
 	collapsedStringLength: 25,
 	maxArrayElements: 25,
 	maxObjectElements: 50,
 	defaultOpenLevels: 1
-}, O = e(D), k = a.dl`
+}, k = e(O), A = a.dl`
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -153,49 +150,42 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
     cursor: text;
     min-height: 1.25rem;
     gap: 0.5rem;
-`, A = a.dt`
+`, j = a.dt`
     color: var(--theme-base0D);
     display: block;
     font-weight: 700;
     cursor: pointer;
-`, j = a.dd`
+`, M = a.dd`
     color: var(--theme-base0D);
     display: block;
     font-weight: 700;
     cursor: pointer;
-`, M = ({ currentIndex: e, onClick: t }) => {
-	let { maxArrayElements: r } = n(O);
-	return /* @__PURE__ */ c(k, {
+`, N = ({ currentIndex: e, onClick: t }) => {
+	let { maxArrayElements: r } = n(k);
+	return /* @__PURE__ */ c(A, {
 		onClick: t,
-		children: [/* @__PURE__ */ c(A, { children: [
+		children: [/* @__PURE__ */ c(j, { children: [
 			"[0 … ",
 			e * r - 1,
 			"]"
-		] }), /* @__PURE__ */ s(j, {
+		] }), /* @__PURE__ */ s(M, {
 			className: "json-view--value",
 			children: "prev"
 		})]
 	});
-}, N = ({ currentIndex: e, maxItems: t, onClick: r }) => {
-	let { maxArrayElements: i } = n(O);
-	return /* @__PURE__ */ c("div", {
-		className: "json-view--node",
+}, P = ({ currentIndex: e, maxItems: t, onClick: r }) => {
+	let { maxArrayElements: i } = n(k);
+	return /* @__PURE__ */ c(A, {
 		onClick: r,
-		children: [/* @__PURE__ */ c("dt", {
-			className: "json-view--key",
-			children: [
-				"[",
-				(e + 1) * i,
-				" … ",
-				t - 1,
-				"]"
-			]
-		}), /* @__PURE__ */ s("dd", {
-			className: "json-view--value",
-			children: "next"
-		})]
+		children: [/* @__PURE__ */ c(j, { children: [
+			"[",
+			(e + 1) * i,
+			" … ",
+			t - 1,
+			"]"
+		] }), /* @__PURE__ */ s(M, { children: "next" })]
 	});
-}, P = a.span`
+}, F = a.span`
     &::before {
         content: '[ ';
     }
@@ -203,26 +193,26 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
     &::after {
         content: ' ]';
     }
-`, F = t(({ value: e, nodeKey: t, open: r = 0 }) => {
-	let a = Math.max(r ?? 0, 0) > 0, { maxArrayElements: l } = n(O), [u, d] = i(a), [f, p] = i(0), m = Math.floor(e.length / l);
-	return /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ c(k, { children: [/* @__PURE__ */ s(T, {
+`, I = t(({ value: e, nodeKey: t, open: r = 0 }) => {
+	let a = Math.max(r ?? 0, 0) > 0, { maxArrayElements: l } = n(k), [u, d] = i(a), [f, p] = i(0), m = Math.floor(e.length / l);
+	return /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ c(A, { children: [/* @__PURE__ */ s(E, {
 		expandable: !!e.length,
 		type: typeof e,
 		expanded: u,
 		onClick: () => d(!u),
 		children: t
-	}), !u && /* @__PURE__ */ s("dd", { children: /* @__PURE__ */ s(P, { children: e.length > 0 && /* @__PURE__ */ c("span", { children: ["… ", e.length] }) }) })] }), u && /* @__PURE__ */ c("dl", { children: [
-		f > 0 && /* @__PURE__ */ s(M, {
+	}), !u && /* @__PURE__ */ s("dd", { children: /* @__PURE__ */ s(F, { children: e.length > 0 && /* @__PURE__ */ c("span", { children: ["… ", e.length] }) }) })] }), u && /* @__PURE__ */ c("dl", { children: [
+		f > 0 && /* @__PURE__ */ s(N, {
 			currentIndex: f,
 			onClick: () => {
 				p(Math.max(f - 1, 0));
 			}
 		}),
-		e.filter((e, t) => Math.floor(t / l) === f).map((e, t) => /* @__PURE__ */ s(H, {
+		e.filter((e, t) => Math.floor(t / l) === f).map((e, t) => /* @__PURE__ */ s(U, {
 			nodeKey: t + f * l,
 			value: e
 		}, t)),
-		f < m && m > 0 && /* @__PURE__ */ s(N, {
+		f < m && m > 0 && /* @__PURE__ */ s(P, {
 			currentIndex: f,
 			maxItems: e.length,
 			onClick: () => {
@@ -230,35 +220,35 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
 			}
 		})
 	] })] });
-}), I = a.span`
+}), L = a.span`
     &::before {
         content: '{ ';
     }
     &::after {
         content: ' }';
     }
-`, L = t(({ value: e, nodeKey: t, open: r = 0 }) => {
-	let [a, l] = i(Math.max(r ?? 0, 0) > 0), { collapsedStringLength: u } = n(O), d = Object.keys(e), f = d.map((t) => `${t}:${JSON.stringify(e[t])}`).join(", ");
-	return /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ c(k, { children: [/* @__PURE__ */ s(T, {
+`, R = t(({ value: e, nodeKey: t, open: r = 0 }) => {
+	let [a, l] = i(Math.max(r ?? 0, 0) > 0), { collapsedStringLength: u } = n(k), d = Object.keys(e), f = d.map((t) => `${t}:${JSON.stringify(e[t])}`).join(", ");
+	return /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ c(A, { children: [/* @__PURE__ */ s(E, {
 		expandable: d.length > 0,
 		expanded: a,
 		onClick: () => l(!a),
 		type: typeof e,
 		children: t
-	}), !a && /* @__PURE__ */ s("dd", { children: /* @__PURE__ */ c(I, { children: [f.slice(0, u), f.length > u && /* @__PURE__ */ s("span", {
+	}), !a && /* @__PURE__ */ s(A, { children: /* @__PURE__ */ c(L, { children: [f.slice(0, u), f.length > u && /* @__PURE__ */ s("span", {
 		className: "ms-1",
 		children: "…"
-	})] }) })] }), a && /* @__PURE__ */ s("dl", { children: d.map((t) => /* @__PURE__ */ s(H, {
+	})] }) })] }), a && /* @__PURE__ */ s("dl", { children: d.map((t) => /* @__PURE__ */ s(U, {
 		nodeKey: t,
 		value: e[t],
 		open: r - 1
 	}, t)) })] });
-}), R = a.dd`
+}), z = a.dd`
     color: var(--theme-base09);
-`, z = ({ nodeKey: e, value: t }) => /* @__PURE__ */ c(k, { children: [/* @__PURE__ */ s(T, {
+`, B = ({ nodeKey: e, value: t }) => /* @__PURE__ */ c(A, { children: [/* @__PURE__ */ s(E, {
 	type: typeof t,
 	children: e
-}), /* @__PURE__ */ s(R, { children: x(t) })] }), B = a.dd`
+}), /* @__PURE__ */ s(z, { children: b(t) })] }), V = a.dd`
     color: var(--theme-base0B);
     width: 100%;
     &:not(.collapsed) {
@@ -278,48 +268,38 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
     &::after {
         content: '"';
     }
-`, V = ({ nodeKey: e, value: t }) => {
-	let { collapsedStringLength: r } = n(O), [a, l] = i(t.length <= r);
-	return /* @__PURE__ */ c(k, { children: [/* @__PURE__ */ s(T, {
+`, H = ({ nodeKey: e, value: t }) => {
+	let { collapsedStringLength: r } = n(k), [a, l] = i(t.length <= r);
+	return /* @__PURE__ */ c(A, { children: [/* @__PURE__ */ s(E, {
 		expandable: t.length > r,
 		expanded: a,
 		onClick: () => l(!a),
 		type: typeof t,
 		children: e
-	}), /* @__PURE__ */ c(B, {
-		className: (0, S.default)({ collapsed: !a }),
+	}), /* @__PURE__ */ c(V, {
+		className: (0, C.default)({ collapsed: !a }),
 		children: [!a && /* @__PURE__ */ s(o, { children: t.replace(/[\n\t]/g, " ") }), a && /* @__PURE__ */ s(o, { children: t })]
 	})] });
-}, H = ({ nodeKey: e, value: t, open: n = 0 }) => {
-	switch (b(t)) {
-		case "number":
-		case "boolean":
-		case "bigint": return /* @__PURE__ */ s(z, {
-			value: t,
-			nodeKey: e,
-			open: n
-		});
-		case "string": return /* @__PURE__ */ s(V, {
-			value: t,
-			nodeKey: e,
-			open: n
-		});
-		case "object": return /* @__PURE__ */ s(L, {
-			nodeKey: e,
-			value: t,
-			open: n
-		});
-		case "array": return /* @__PURE__ */ s(F, {
-			nodeKey: e,
-			value: t,
-			open: n
-		});
-	}
-	return /* @__PURE__ */ c(k, { children: [/* @__PURE__ */ s(T, {
-		type: typeof t,
-		children: e
-	}), /* @__PURE__ */ s("dd", { children: x(t) })] });
-}, U = a.div`
+}, U = ({ nodeKey: e, value: t, open: n = 0 }) => x(t) ? /* @__PURE__ */ s(B, {
+	value: t,
+	nodeKey: e,
+	open: n
+}) : typeof t == "string" ? /* @__PURE__ */ s(H, {
+	value: t,
+	nodeKey: e,
+	open: n
+}) : Array.isArray(t) ? /* @__PURE__ */ s(I, {
+	value: t,
+	nodeKey: e,
+	open: n
+}) : S(t) ? /* @__PURE__ */ s(R, {
+	value: t,
+	nodeKey: e,
+	open: n
+}) : /* @__PURE__ */ c(A, { children: [/* @__PURE__ */ s(E, {
+	type: typeof t,
+	children: e
+}), /* @__PURE__ */ s("dd", { children: b(t) })] }), W = a.div`
     .json-view {
         --theme-base00: #002b36;
         --theme-base01: #073642;
@@ -369,67 +349,58 @@ var l = Object.create, u = Object.defineProperty, d = Object.getOwnPropertyDescr
         }
     }
 
-`, W = ({ data: e, theme: t, dark: a, rootNodeName: o, collapsedStringLength: c, maxArrayElements: l, maxObjectElements: u, defaultOpenLevels: d }) => {
-	let [f, p] = i(v), [m, h] = i({}), [g, _] = i({}), y = n(O), [b, x] = i({
-		...D,
-		...y
-	});
+`;
+//#endregion
+//#region src/JSONView.tsx
+function G({ data: e, theme: t, dark: a, rootNodeName: o, collapsedStringLength: c, maxArrayElements: l, maxObjectElements: u, defaultOpenLevels: d }) {
+	let [f, p] = i({}), [m, h] = i(e), g = n(k);
+	r(() => {
+		Promise.resolve().then(() => {
+			let e = t ?? (a ? D.dark : D.light);
+			p({
+				"--theme-base00": e.base00,
+				"--theme-base01": e.base01,
+				"--theme-base02": e.base02,
+				"--theme-base03": e.base03,
+				"--theme-base04": e.base04,
+				"--theme-base05": e.base05,
+				"--theme-base06": e.base06,
+				"--theme-base07": e.base07,
+				"--theme-base08": e.base08,
+				"--theme-base09": e.base09,
+				"--theme-base0A": e.base0A,
+				"--theme-base0B": e.base0B,
+				"--theme-base0C": e.base0C,
+				"--theme-base0D": e.base0D,
+				"--theme-base0E": e.base0E,
+				"--theme-base0F": e.base0F
+			});
+		});
+	}, [t, a]);
+	let _ = {
+		collapsedStringLength: c ?? g?.collapsedStringLength ?? O.collapsedStringLength,
+		maxArrayElements: l ?? g.maxArrayElements ?? O.maxArrayElements,
+		maxObjectElements: u ?? g.maxObjectElements ?? O.maxObjectElements,
+		defaultOpenLevels: d ?? g.defaultOpenLevels ?? O.defaultOpenLevels
+	};
 	return r(() => {
-		x({
-			...D,
-			...y
+		Promise.resolve().then(() => {
+			h(e);
 		});
-	}, [y]), r(() => {
-		p(t || (a ? E.dark : E.light));
-	}, [t]), r(() => {
-		x({
-			...b,
-			...y,
-			collapsedStringLength: c ?? y.collapsedStringLength,
-			maxArrayElements: l ?? y.maxArrayElements,
-			maxObjectElements: u ?? y.maxObjectElements,
-			defaultOpenLevels: d ?? y.defaultOpenLevels
-		});
-	}, [
-		c,
-		l,
-		u,
-		d
-	]), r(() => {
-		h({
-			"--theme-base00": f.base00,
-			"--theme-base01": f.base01,
-			"--theme-base02": f.base02,
-			"--theme-base03": f.base03,
-			"--theme-base04": f.base04,
-			"--theme-base05": f.base05,
-			"--theme-base06": f.base06,
-			"--theme-base07": f.base07,
-			"--theme-base08": f.base08,
-			"--theme-base09": f.base09,
-			"--theme-base0A": f.base0A,
-			"--theme-base0B": f.base0B,
-			"--theme-base0C": f.base0C,
-			"--theme-base0D": f.base0D,
-			"--theme-base0E": f.base0E,
-			"--theme-base0F": f.base0F
-		});
-	}, [f]), r(() => {
-		_(e);
-	}, [e]), /* @__PURE__ */ s(O.Provider, {
-		value: b,
-		children: /* @__PURE__ */ s(U, { children: /* @__PURE__ */ s("div", {
-			className: (0, S.default)("json-view", { "json-view--dark": a }),
-			style: m,
-			children: /* @__PURE__ */ s("dl", { children: /* @__PURE__ */ s(H, {
+	}, [e]), /* @__PURE__ */ s(k.Provider, {
+		value: _,
+		children: /* @__PURE__ */ s(W, { children: /* @__PURE__ */ s("div", {
+			className: (0, C.default)("json-view", { "json-view--dark": a }),
+			style: f,
+			children: /* @__PURE__ */ s("dl", { children: /* @__PURE__ */ s(U, {
 				nodeKey: o || "root",
-				value: g,
+				value: e,
 				open: d
 			}) })
 		}) })
 	});
-};
+}
 //#endregion
-export { W as JSONView, O as JSONViewContext, D as defaultSettings, v as google, y as monokai, E as preferredThemes };
+export { G as JSONView, k as JSONViewContext, O as defaultSettings, v as google, y as monokai, D as preferredThemes };
 
-//# sourceMappingURL=index.es.js.map
+//# sourceMappingURL=json-view.js.map
