@@ -13,12 +13,13 @@ export default defineConfig({
         lib: {
             entry: resolve(cwd(), './src/index.tsx'),
             name: 'JSONView',
-            fileName: (format) => `index.${format}.js`,
+            // fileName: (format) => `index.${format}.js`,
             formats: ['es', 'cjs'],
         },
         rollupOptions: {
             external: ['react', 'react/jsx-runtime', 'react-dom', '@emotion/styled'],
             output: {
+                // cleanDir: true,
                 globals:{
                     react: 'React',
                     'react-dom': 'ReactDOM',

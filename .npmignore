@@ -1,0 +1,11 @@
+/node_modules/
+/.idea/
+/src
+/public
+/test
+/index.html
+/tsconfig.json
+/tsconfig-dts.json
+/vite.config.ts
+/changelog-template.hbs
+/eslint.config.js
