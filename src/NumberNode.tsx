@@ -1,11 +1,11 @@
-import type {JSONNodeProps} from "./types";
+import type {JSONNodeProps, NumberValue} from "./types";
 import {jsonNodeValue} from "./utils";
 import NodeKey from "./NodeKey";
 import StyledNode from "./StyledNode";
 import styled from "@emotion/styled";
 
 interface NumberNodeProps extends JSONNodeProps {
-    value: number | bigint | boolean;
+    value: NumberValue;
 }
 
 const StyledDD = styled.dd`

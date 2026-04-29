@@ -1,20 +1,20 @@
 import type {ReactNode} from "react";
 export type {Base16Theme} from "base16";
 
-export type PreviewFunction = (value: any) => ReactNode;
+export type PreviewFunction = (value: unknown) => ReactNode;
 
 export interface KeyedObject {
-    [key: string]: any,
+    [key: string]: unknown,
 }
 
 export interface JSONNodeProps {
     nodeKey: string | number;
-    value: any;
+    value: unknown;
     open?: number;
 }
 
 export interface ArrayValueProps extends JSONNodeProps {
-    value: any[],
+    value: unknown[],
 }
 
 export interface JSONViewSettings {
@@ -24,3 +24,4 @@ export interface JSONViewSettings {
     defaultOpenLevels: number,
 }
 
+export type NumberValue = number|bigint|boolean

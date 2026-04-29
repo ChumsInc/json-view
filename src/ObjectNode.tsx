@@ -32,12 +32,12 @@ const ObjectNode = ({value, nodeKey, open = 0}: ObjectNodeProps) => {
                          expanded={show} onClick={() => setShow(!show)}
                          type={typeof value}>{nodeKey}</NodeKey>
                 {!show && (
-                    <dd>
+                    <StyledNode>
                         <CollapsedObject>
                             {collapsedKeys.slice(0, collapsedStringLength)}
                             {collapsedKeys.length > collapsedStringLength && <span className="ms-1">&hellip;</span>}
                         </CollapsedObject>
-                    </dd>
+                    </StyledNode>
                 )}
             </StyledNode>
             {show && (

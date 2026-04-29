@@ -1,4 +1,4 @@
-import {jsonNodeValue, nodeType} from "./utils";
+import {isKeyedObject, isNumberNode, jsonNodeValue} from "./utils";
 import NodeKey from "./NodeKey";
 import type {JSONNodeProps} from "./types";
 import ArrayNode from "./ArrayNode";
@@ -9,17 +9,17 @@ import StyledNode from "./StyledNode";
 
 
 const JSONNode = ({nodeKey, value, open = 0}: JSONNodeProps) => {
-    switch (nodeType(value)) {
-        case 'number':
-        case 'boolean':
-        case 'bigint':
-            return <NumberNode value={value} nodeKey={nodeKey} open={open}/>
-        case 'string':
-            return <StringNode value={value} nodeKey={nodeKey} open={open}/>
-        case 'object':
-            return <ObjectNode nodeKey={nodeKey} value={value} open={open}/>
-        case 'array':
-            return <ArrayNode nodeKey={nodeKey} value={value} open={open}/>
+    if (isNumberNode(value)) {
+        return <NumberNode value={value} nodeKey={nodeKey} open={open}/>
+    }
+    if (typeof value === 'string') {
+        return <StringNode value={value} nodeKey={nodeKey} open={open}/>
+    }
+    if (Array.isArray(value)) {
+        return <ArrayNode value={value} nodeKey={nodeKey} open={open}/>
+    }
+    if (isKeyedObject(value)) {
+        return <ObjectNode value={value} nodeKey={nodeKey} open={open}/>
     }
 
     return (

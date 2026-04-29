@@ -51,7 +51,7 @@ const ArrayNode = ({value, nodeKey, open = 0}: ArrayValueProps) => {
                     )}
                     {value
                         .filter((_, index) => Math.floor(index / maxArrayElements) === arrayIndex)
-                        .map((v: any, index: number) => (
+                        .map((v: unknown, index: number) => (
                             <JSONNode key={index} nodeKey={index + (arrayIndex * maxArrayElements)} value={v}/>
                         ))}
                     {arrayIndex < maxIndex && maxIndex > 0 && (

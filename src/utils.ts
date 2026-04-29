@@ -1,20 +1,6 @@
-export const nodeType = (value:any) => {
-    const type = typeof value;
-    switch (type) {
-    case 'object':
-        if (value === null) {
-            return 'null';
-        }
-        if (Array.isArray(value)) {
-            return 'array';
-        }
-        return type;
-    default:
-        return type;
-    }
-}
+import type {KeyedObject, NumberValue} from "./types";
 
-export const jsonNodeValue = (value:any) => {
+export const jsonNodeValue = (value:unknown) => {
     try {
         return JSON.stringify(value, undefined, 2);
     } catch(err:unknown) {
@@ -23,4 +9,13 @@ export const jsonNodeValue = (value:any) => {
         }
         return null;
     }
+}
+
+export const isNumberNode = (value:unknown|NumberValue):value is NumberValue  => {
+    const _type = typeof value;
+    return _type === 'number' || _type === 'bigint' || _type === 'boolean';
+}
+
+export const isKeyedObject = (value:unknown|KeyedObject):value is KeyedObject => {
+    return typeof value === 'object' && value !== null;
 }

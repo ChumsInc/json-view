@@ -1,4 +1,4 @@
-import {type Base16Theme, google} from "base16";
+import {type Base16Theme} from "base16";
 import {type CSSProperties, useContext, useEffect, useState} from "react";
 import JSONNode from "./JSONNode";
 import classNames from "classnames";
@@ -7,8 +7,8 @@ import JSONViewStyleContainer from "./JSONViewStyleContainer";
 import type {JSONViewSettings} from "./types";
 
 
-export interface JSONViewProps {
-    data: any,
+export interface JSONViewProps<T = unknown> {
+    data: T,
     theme?: Base16Theme,
     dark?: boolean,
     rootNodeName?: string,
@@ -18,68 +18,57 @@ export interface JSONViewProps {
     defaultOpenLevels?: number,
 }
 
-const JSONView = ({
-                      data,
-                      theme,
-                      dark,
-                      rootNodeName,
-                      collapsedStringLength,
-                      maxArrayElements,
-                      maxObjectElements,
-                      defaultOpenLevels,
-                  }: JSONViewProps) => {
-    const [currentTheme, setCurrentTheme] = useState<Base16Theme>(google);
+export default function JSONView<T = unknown>({
+                                                  data,
+                                                  theme,
+                                                  dark,
+                                                  rootNodeName,
+                                                  collapsedStringLength,
+                                                  maxArrayElements,
+                                                  maxObjectElements,
+                                                  defaultOpenLevels,
+                                              }: JSONViewProps<T>) {
     const [style, setStyle] = useState<CSSProperties>({})
-    const [json, setJSON] = useState({});
+    const [json, setJSON] = useState<T | null>(data);
 
-    // if wrapped in a parent context then use that context
     const parentContext = useContext<JSONViewSettings>(JSONViewContext);
-    const [context, setContext] = useState<JSONViewSettings>({...defaultSettings, ...parentContext});
 
     useEffect(() => {
-        setContext({...defaultSettings, ...parentContext});
-    }, [parentContext])
-    // set the theme based on passed theme or preferred theme
-    useEffect(() => {
-        setCurrentTheme(theme || (dark ? preferredThemes.dark : preferredThemes.light));
-    }, [theme]);
-
-    // if passing context specific params to JSONView, then set those based on either parent context or default context
-    useEffect(() => {
-        setContext({
-            ...context,
-            ...parentContext,
-            collapsedStringLength: collapsedStringLength ?? parentContext.collapsedStringLength,
-            maxArrayElements: maxArrayElements ?? parentContext.maxArrayElements,
-            maxObjectElements: maxObjectElements ?? parentContext.maxObjectElements,
-            defaultOpenLevels: defaultOpenLevels ?? parentContext.defaultOpenLevels,
+        Promise.resolve().then(() => {
+            const nextTheme = theme ?? (dark ? preferredThemes.dark : preferredThemes.light);
+            const style = {
+                "--theme-base00": nextTheme.base00,
+                "--theme-base01": nextTheme.base01,
+                "--theme-base02": nextTheme.base02,
+                "--theme-base03": nextTheme.base03,
+                "--theme-base04": nextTheme.base04,
+                "--theme-base05": nextTheme.base05,
+                "--theme-base06": nextTheme.base06,
+                "--theme-base07": nextTheme.base07,
+                "--theme-base08": nextTheme.base08,
+                "--theme-base09": nextTheme.base09,
+                "--theme-base0A": nextTheme.base0A,
+                "--theme-base0B": nextTheme.base0B,
+                "--theme-base0C": nextTheme.base0C,
+                "--theme-base0D": nextTheme.base0D,
+                "--theme-base0E": nextTheme.base0E,
+                "--theme-base0F": nextTheme.base0F,
+            } as CSSProperties;
+            setStyle(style);
         })
-    }, [collapsedStringLength, maxArrayElements, maxObjectElements, defaultOpenLevels]);
+    }, [theme, dark]);
+
+    const context:JSONViewSettings = {
+        collapsedStringLength: collapsedStringLength ?? parentContext?.collapsedStringLength ?? defaultSettings.collapsedStringLength,
+        maxArrayElements: maxArrayElements ?? parentContext.maxArrayElements ?? defaultSettings.maxArrayElements,
+        maxObjectElements: maxObjectElements ?? parentContext.maxObjectElements ?? defaultSettings.maxObjectElements,
+        defaultOpenLevels: defaultOpenLevels ?? parentContext.defaultOpenLevels ?? defaultSettings.defaultOpenLevels,
+    }
 
     useEffect(() => {
-        const style = {
-            "--theme-base00": currentTheme.base00,
-            "--theme-base01": currentTheme.base01,
-            "--theme-base02": currentTheme.base02,
-            "--theme-base03": currentTheme.base03,
-            "--theme-base04": currentTheme.base04,
-            "--theme-base05": currentTheme.base05,
-            "--theme-base06": currentTheme.base06,
-            "--theme-base07": currentTheme.base07,
-            "--theme-base08": currentTheme.base08,
-            "--theme-base09": currentTheme.base09,
-            "--theme-base0A": currentTheme.base0A,
-            "--theme-base0B": currentTheme.base0B,
-            "--theme-base0C": currentTheme.base0C,
-            "--theme-base0D": currentTheme.base0D,
-            "--theme-base0E": currentTheme.base0E,
-            "--theme-base0F": currentTheme.base0F,
-        } as CSSProperties;
-        setStyle(style);
-    }, [currentTheme]);
-
-    useEffect(() => {
-        setJSON(data);
+        Promise.resolve().then(() => {
+            setJSON(data);
+        })
     }, [data])
 
     return (
@@ -87,11 +76,10 @@ const JSONView = ({
             <JSONViewStyleContainer>
                 <div className={classNames("json-view", {'json-view--dark': dark})} style={style}>
                     <dl>
-                        <JSONNode nodeKey={rootNodeName || "root"} value={json} open={defaultOpenLevels}/>
+                        <JSONNode nodeKey={rootNodeName || "root"} value={data} open={defaultOpenLevels}/>
                     </dl>
                 </div>
             </JSONViewStyleContainer>
         </JSONViewContext.Provider>
     )
 }
-export default JSONView;
