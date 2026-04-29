@@ -1,144 +1,44 @@
 import JSONView from "../src/JSONView";
 import {type ChangeEvent, useEffect, useState} from "react";
 
-import {
-    apathy,
-    ashes,
-    atelierDune,
-    atelierForest,
-    atelierHeath,
-    atelierLakeside,
-    atelierSeaside,
-    type Base16Theme,
-    bespin,
-    brewer,
-    bright,
-    chalk,
-    codeschool,
-    colors,
-    eighties,
-    embers,
-    flat,
-    google,
-    grayscale,
-    greenscreen,
-    harmonic,
-    hopscotch,
-    isotope,
-    marrakesh,
-    mocha,
-    monokai,
-    ocean,
-    paraiso,
-    pop,
-    railscasts,
-    shapeshifter,
-    solarized,
-    summerfruit,
-    threezerotwofour,
-    tomorrow,
-    tube,
-    twilight
-} from "base16";
+
 import {defaultSettings, JSONViewContext} from "../src";
+import {getTestData, testData} from "./testData";
+import type {Base16Theme} from "base16";
+import {themes} from "./themes";
 
-interface ThemeList {
-    [key: string]: Base16Theme,
-}
-
-const themes: ThemeList = {
-    solarized, chalk, apathy, monokai, codeschool, ashes, pop, atelierDune,
-    atelierForest, atelierHeath, atelierLakeside, atelierSeaside,
-    bespin, brewer, bright, colors, embers, flat, google, eighties, grayscale, harmonic,
-    greenscreen, isotope, hopscotch, mocha, ocean,
-    paraiso, marrakesh, railscasts, tube, shapeshifter, summerfruit,
-    tomorrow, twilight, threezerotwofour
-}
 
 interface DataState {
     loading?: boolean,
-    data: any,
+    data: unknown,
     error?: string,
 }
 
 const initialState: DataState = {data: null};
 
-interface TestURLList {
-    [key: string]: {
-        title: string,
-        url: string
-    },
-}
-
-const testURLs: TestURLList = {
-    artists: {
-        title: 'Artists Search',
-        url: './artists-search.json',
-    },
-    painOfSalvation: {
-        title: 'Pain of Salvation',
-        url: './pos.json'
-    },
-    dreamTheater: {
-        title: 'Dream Theater',
-        url: '/public/dream-theater.json'
-    },
-    currentSong: {
-        title: 'Now Playing',
-        url: '/public/current-song.json'
-    },
-    random: {
-        title: 'Saved Random Data',
-        url: '/public/random-2.json'
-    },
-
-}
-
-async function fetchData(urlKey: string) {
-    try {
-        if (!urlKey || !testURLs[urlKey]) {
-            return {data: null};
-        }
-        const res = await fetch(testURLs[urlKey].url);
-        const json = await res.json();
-        return {data: json};
-    } catch (err: unknown) {
-        if (err instanceof Error) {
-            console.warn("reducer()", err.message);
-            return {data: null, error: err.message};
-        }
-        console.warn("reducer()", err);
-        return {data: null, error: 'unknown error'};
-    }
-
-}
 
 const defaultTheme = 'monokai';
 const darkDefault = true;
 
 const App = () => {
-    const [filename, setFilename] = useState<string>('artists');
-    const [data, setData] = useState<DataState>(initialState);
-    const [theme, setTheme] = useState<Base16Theme>(monokai);
+    const [filename, setFilename] = useState<string>('artists-search');
+    const [theme, setTheme] = useState<Base16Theme>(themes['tube']);
     const [themeName, setThemeName] = useState<string>('tube');
     const [dark, setDark] = useState(darkDefault);
+    const [data, setData] = useState<DataState>(initialState);
 
     useEffect(() => {
-        setTheme(themes[defaultTheme]);
-        setThemeName(defaultTheme);
-
-    }, [])
-
-    useEffect(() => {
-        setData({data: {loading: true}});
-        fetchData(filename)
-            .then(data => setData(data));
+        Promise.resolve(getTestData(filename))
+            .then(data => {
+                console.log(filename, data);
+                setData({data, loading: false});
+            })
+            .catch(err => {
+                if (err instanceof Error) {
+                    setData({data: null, error: err.message, loading: false});
+                }
+            })
     }, [filename]);
-
-    // useEffect(() => {
-    //     fetchData(filename)
-    //         .then(data => setData(data));
-    // }, []);
 
     const changeHandler = (ev: ChangeEvent<HTMLSelectElement>) => {
         const key = ev.target.value;
@@ -167,8 +67,8 @@ const App = () => {
                     <select className="form-select form-select-sm" value={filename}
                             onChange={(ev) => setFilename(ev.target.value)}>
                         <option value="">-</option>
-                        {Object.keys(testURLs).map(key => (
-                            <option key={key} value={key}>{testURLs[key].title}</option>))}
+                        {Object.keys(testData).map(key => (
+                            <option key={key} value={testData[key].filename}>{testData[key].title}</option>))}
                     </select>
                 </div>
                 <div className="col-auto">
@@ -185,7 +85,7 @@ const App = () => {
                 </div>
             </div>
             <JSONViewContext.Provider value={{...defaultSettings, maxArrayElements: 10}}>
-                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testURLs[filename]?.title}/>
+                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testData[filename]?.title}/>
             </JSONViewContext.Provider>
         </div>
     )
