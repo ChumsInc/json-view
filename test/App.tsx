@@ -6,6 +6,7 @@ import {defaultSettings, JSONViewContext} from "../src";
 import {getTestData, testData} from "./testData";
 import type {Base16Theme} from "base16";
 import {themes} from "./themes";
+import {useDocumentColorScheme} from "@chumsinc/ui-utils";
 
 
 interface DataState {
@@ -17,15 +18,12 @@ interface DataState {
 const initialState: DataState = {data: null};
 
 
-const defaultTheme = 'monokai';
-const darkDefault = true;
-
 const App = () => {
     const [filename, setFilename] = useState<string>('artists-search');
     const [theme, setTheme] = useState<Base16Theme>(themes['tube']);
     const [themeName, setThemeName] = useState<string>('tube');
-    const [dark, setDark] = useState(darkDefault);
     const [data, setData] = useState<DataState>(initialState);
+    const colorScheme = useDocumentColorScheme();
 
     useEffect(() => {
         Promise.resolve(getTestData(filename))
@@ -71,21 +69,9 @@ const App = () => {
                             <option key={key} value={testData[key].filename}>{testData[key].title}</option>))}
                     </select>
                 </div>
-                <div className="col-auto">
-                    <div className="form-check form-check-inline">
-                        <input type="radio" checked={dark} id="jv--dark-toggle" className="form-check-input"
-                               onChange={() => setDark(true)}/>
-                        <label className="form-check-label" htmlFor="jv--dark-toggle">Dark Mode</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input type="radio" checked={!dark} id="jv--light-toggle" className="form-check-input"
-                               onChange={() => setDark(false)}/>
-                        <label className="form-check-label" htmlFor="jv--light-toggle">Light Mode</label>
-                    </div>
-                </div>
             </div>
             <JSONViewContext.Provider value={{...defaultSettings, maxArrayElements: 10}}>
-                <JSONView data={data.data} theme={theme} dark={dark} rootNodeName={testData[filename]?.title}/>
+                <JSONView data={data.data} theme={theme} dark={colorScheme === 'dark'} rootNodeName={testData[filename]?.title}/>
             </JSONViewContext.Provider>
         </div>
     )
